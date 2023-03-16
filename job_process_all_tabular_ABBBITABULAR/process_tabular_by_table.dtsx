@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="148"
-  DTS:VersionGUID="{3214CFDC-07CF-4016-A72C-0445F06E3480}">
+  DTS:VersionBuild="154"
+  DTS:VersionGUID="{FAC16067-B83E-4C80-962D-BB168C19A1B1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -431,15 +431,6 @@
       DTS:ObjectName="query">
       <DTS:VariableValue
         DTS:DataType="8">SELECT TABLE_NAME FROM $System.DBSchema_Tables WHERE TABLE_TYPE = 'SYSTEM TABLE' ORDER BY TABLE_NAME</DTS:VariableValue>
-    </DTS:Variable>
-    <DTS:Variable
-      DTS:CreationName=""
-      DTS:DTSID="{27F5A632-5F95-4020-AEA6-681E2028B289}"
-      DTS:IncludeInDebugDump="6789"
-      DTS:Namespace="User"
-      DTS:ObjectName="RowCount">
-      <DTS:VariableValue
-        DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -2037,6 +2028,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
       DTS:Description="Sequence Container"
       DTS:DTSID="{916A6EC0-96E1-4A45-862B-A620D5C10E55}"
       DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:ForceExecutionResult="0"
       DTS:LocaleID="-1"
       DTS:ObjectName="Sequence Container">
       <DTS:Variables />
@@ -2101,6 +2093,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           DTS:Description="Foreach Loop Container"
           DTS:DTSID="{c6e05d54-a574-4c12-b53d-b18e20ef8461}"
           DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:ForceExecutionResult="0"
           DTS:LocaleID="-1"
           DTS:ObjectName="Process 1">
           <DTS:ForEachEnumerator
@@ -2129,6 +2122,44 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
                 DTS:Name="ConnectionName">"Model_Process_Connection"</DTS:PropertyExpression>
               <DTS:PropertyExpression
                 DTS:Name="ProcessingCommands">"{ "+ " \""+"refresh"+ "\""+": { "+ " \""+"type"+ "\""+": "+ " \""+"full"+ "\""+", "+ " \""+"objects"+ "\""+": [ { "+ " \""+"database"+ "\""+": "+ " \""+ @[User::Model] + "\""+", "+ " \""+"table"+ "\""+": "+ " \""+ @[User::TableName1] + "\""+" } ] } }"</DTS:PropertyExpression>
+              <DTS:EventHandlers>
+                <DTS:EventHandler
+                  DTS:refId="Package\Sequence Container\Process 1\Analysis Services Processing Task.EventHandlers[OnError]"
+                  DTS:CreationName="OnError"
+                  DTS:DTSID="{0E54C100-D77F-4C06-BE81-C4FDEF6964F4}"
+                  DTS:EventID="0"
+                  DTS:EventName="OnError"
+                  DTS:LocaleID="-1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:Description="The propagate property of the event"
+                      DTS:DTSID="{13682CC8-B43D-4216-AB81-2FB9A1E71905}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="System"
+                      DTS:ObjectName="Propagate">
+                      <DTS:VariableValue
+                        DTS:DataType="11">-1</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:Executables>
+                    <DTS:Executable
+                      DTS:refId="Package\Sequence Container\Process 1\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+                      DTS:CreationName="Microsoft.ExpressionTask"
+                      DTS:Description="Expression Task"
+                      DTS:DTSID="{6b2b1ec8-2b14-481c-a24f-01e86bdcb9f3}"
+                      DTS:ExecutableType="Microsoft.ExpressionTask"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Expression Task">
+                      <DTS:Variables />
+                      <DTS:ObjectData>
+                        <ExpressionTask
+                          Expression="@[User::Process1_log]= @[User::Process1_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName1]+&quot;&lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;" />
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                  </DTS:Executables>
+                </DTS:EventHandler>
+              </DTS:EventHandlers>
               <DTS:ObjectData>
                 <ASProcessingData
                   ConnectionName="Model_Process_Connection"
@@ -2176,6 +2207,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           DTS:Description="Foreach Loop Container"
           DTS:DTSID="{18e594e8-c8f2-42eb-95ca-270d1f7b2a37}"
           DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:ForceExecutionResult="0"
           DTS:LocaleID="-1"
           DTS:ObjectName="Process 10">
           <DTS:ForEachEnumerator
@@ -2204,13 +2236,76 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
                 DTS:Name="ConnectionName">"Model_Process_Connection"</DTS:PropertyExpression>
               <DTS:PropertyExpression
                 DTS:Name="ProcessingCommands">"{ "+ " \""+"refresh"+ "\""+": { "+ " \""+"type"+ "\""+": "+ " \""+"full"+ "\""+", "+ " \""+"objects"+ "\""+": [ { "+ " \""+"database"+ "\""+": "+ " \""+ @[User::Model] + "\""+", "+ " \""+"table"+ "\""+": "+ " \""+ @[User::TableName10] + "\""+" } ] } }"</DTS:PropertyExpression>
+              <DTS:EventHandlers>
+                <DTS:EventHandler
+                  DTS:refId="Package\Sequence Container\Process 10\Analysis Services Processing Task.EventHandlers[OnError]"
+                  DTS:CreationName="OnError"
+                  DTS:DTSID="{D779D437-1082-45EE-B821-EAC33E55AF1F}"
+                  DTS:EventID="6291552"
+                  DTS:EventName="OnError"
+                  DTS:LocaleID="-1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:Description="The propagate property of the event"
+                      DTS:DTSID="{F62D5FFC-A37B-4183-BA6D-93316684C689}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="System"
+                      DTS:ObjectName="Propagate">
+                      <DTS:VariableValue
+                        DTS:DataType="11">-1</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:Executables>
+                    <DTS:Executable
+                      DTS:refId="Package\Sequence Container\Process 10\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+                      DTS:CreationName="Microsoft.ExpressionTask"
+                      DTS:Description="Expression Task"
+                      DTS:DTSID="{196529a6-8ff6-452c-b9d0-087e8dde192b}"
+                      DTS:ExecutableType="Microsoft.ExpressionTask"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Expression Task">
+                      <DTS:Variables />
+                      <DTS:ObjectData>
+                        <ExpressionTask
+                          Expression="@[User::Process10_log]= @[User::Process10_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName10]+&quot;&lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;" />
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                  </DTS:Executables>
+                </DTS:EventHandler>
+              </DTS:EventHandlers>
               <DTS:ObjectData>
                 <ASProcessingData
                   ConnectionName="Model_Process_Connection"
                   ProcessingCommands="{  &quot;refresh&quot;: {  &quot;type&quot;:  &quot;full&quot;,  &quot;objects&quot;: [ {  &quot;database&quot;:  &quot;Sample_data&quot;,  &quot;table&quot;:  &quot;&quot; } ] } }" />
               </DTS:ObjectData>
             </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Sequence Container\Process 10\Expression Task"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{0f62a7c5-e373-4805-a64c-d3967b061a24}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Expression Task"
+              DTS:ThreadHint="2">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::Process10_log]= @[User::Process10_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName10]+&quot;&lt;/td&gt;&lt;td&gt; Completed Successfully &lt;/td&gt;&lt;/tr&gt;&quot;" />
+              </DTS:ObjectData>
+            </DTS:Executable>
           </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Sequence Container\Process 10.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{6F0E04A1-9A06-4C46-A67B-433DC3AE0D59}"
+              DTS:From="Package\Sequence Container\Process 10\Analysis Services Processing Task"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Sequence Container\Process 10\Expression Task" />
+          </DTS:PrecedenceConstraints>
           <DTS:ForEachVariableMappings>
             <DTS:ForEachVariableMapping
               DTS:CreationName=""
@@ -2226,6 +2321,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           DTS:Description="Foreach Loop Container"
           DTS:DTSID="{75b5bbc0-7a6c-465b-a7d9-23e8d36d554f}"
           DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:ForceExecutionResult="0"
           DTS:LocaleID="-1"
           DTS:ObjectName="Process 2">
           <DTS:ForEachEnumerator
@@ -2254,6 +2350,44 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
                 DTS:Name="ConnectionName">"Model_Process_Connection"</DTS:PropertyExpression>
               <DTS:PropertyExpression
                 DTS:Name="ProcessingCommands">"{ "+ " \""+"refresh"+ "\""+": { "+ " \""+"type"+ "\""+": "+ " \""+"full"+ "\""+", "+ " \""+"objects"+ "\""+": [ { "+ " \""+"database"+ "\""+": "+ " \""+ @[User::Model] + "\""+", "+ " \""+"table"+ "\""+": "+ " \""+ @[User::TableName2] + "\""+" } ] } }"</DTS:PropertyExpression>
+              <DTS:EventHandlers>
+                <DTS:EventHandler
+                  DTS:refId="Package\Sequence Container\Process 2\Analysis Services Processing Task.EventHandlers[OnError]"
+                  DTS:CreationName="OnError"
+                  DTS:DTSID="{A658D8A3-D075-4057-B2AC-83F1625107A5}"
+                  DTS:EventID="0"
+                  DTS:EventName="OnError"
+                  DTS:LocaleID="-1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:Description="The propagate property of the event"
+                      DTS:DTSID="{D880461D-B091-47A1-9C6F-C1B238171794}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="System"
+                      DTS:ObjectName="Propagate">
+                      <DTS:VariableValue
+                        DTS:DataType="11">-1</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:Executables>
+                    <DTS:Executable
+                      DTS:refId="Package\Sequence Container\Process 2\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+                      DTS:CreationName="Microsoft.ExpressionTask"
+                      DTS:Description="Expression Task"
+                      DTS:DTSID="{b4d1bf48-ea33-4d48-af44-521663ad7df7}"
+                      DTS:ExecutableType="Microsoft.ExpressionTask"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Expression Task">
+                      <DTS:Variables />
+                      <DTS:ObjectData>
+                        <ExpressionTask
+                          Expression="@[User::Process2_log]= @[User::Process2_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName2]+&quot;&lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;" />
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                  </DTS:Executables>
+                </DTS:EventHandler>
+              </DTS:EventHandlers>
               <DTS:ObjectData>
                 <ASProcessingData
                   ConnectionName="Model_Process_Connection"
@@ -2301,6 +2435,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           DTS:Description="Foreach Loop Container"
           DTS:DTSID="{0707cd29-1b03-4b2a-bf94-725833f496c2}"
           DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:ForceExecutionResult="0"
           DTS:LocaleID="-1"
           DTS:ObjectName="Process 3">
           <DTS:ForEachEnumerator
@@ -2329,13 +2464,76 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
                 DTS:Name="ConnectionName">"Model_Process_Connection"</DTS:PropertyExpression>
               <DTS:PropertyExpression
                 DTS:Name="ProcessingCommands">"{ "+ " \""+"refresh"+ "\""+": { "+ " \""+"type"+ "\""+": "+ " \""+"full"+ "\""+", "+ " \""+"objects"+ "\""+": [ { "+ " \""+"database"+ "\""+": "+ " \""+ @[User::Model] + "\""+", "+ " \""+"table"+ "\""+": "+ " \""+ @[User::TableName3] + "\""+" } ] } }"</DTS:PropertyExpression>
+              <DTS:EventHandlers>
+                <DTS:EventHandler
+                  DTS:refId="Package\Sequence Container\Process 3\Analysis Services Processing Task.EventHandlers[OnError]"
+                  DTS:CreationName="OnError"
+                  DTS:DTSID="{CF5007B9-971A-4304-866F-1299658D8052}"
+                  DTS:EventID="0"
+                  DTS:EventName="OnError"
+                  DTS:LocaleID="-1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:Description="The propagate property of the event"
+                      DTS:DTSID="{0364CDD2-C7C3-4A78-8D1E-5E6718E125DE}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="System"
+                      DTS:ObjectName="Propagate">
+                      <DTS:VariableValue
+                        DTS:DataType="11">-1</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:Executables>
+                    <DTS:Executable
+                      DTS:refId="Package\Sequence Container\Process 3\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+                      DTS:CreationName="Microsoft.ExpressionTask"
+                      DTS:Description="Expression Task"
+                      DTS:DTSID="{30c4a297-b82d-402a-9044-1cae35c12500}"
+                      DTS:ExecutableType="Microsoft.ExpressionTask"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Expression Task">
+                      <DTS:Variables />
+                      <DTS:ObjectData>
+                        <ExpressionTask
+                          Expression="@[User::Process3_log]= @[User::Process3_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName3]+&quot;&lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;" />
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                  </DTS:Executables>
+                </DTS:EventHandler>
+              </DTS:EventHandlers>
               <DTS:ObjectData>
                 <ASProcessingData
                   ConnectionName="Model_Process_Connection"
                   ProcessingCommands="{  &quot;refresh&quot;: {  &quot;type&quot;:  &quot;full&quot;,  &quot;objects&quot;: [ {  &quot;database&quot;:  &quot;Sample_data&quot;,  &quot;table&quot;:  &quot;&quot; } ] } }" />
               </DTS:ObjectData>
             </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Sequence Container\Process 3\Expression Task"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{19069846-c60d-42fe-a2eb-4a48b4b3fac3}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Expression Task"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::Process3_log]= @[User::Process3_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName3]+&quot;&lt;/td&gt;&lt;td&gt; Completed Successfully &lt;/td&gt;&lt;/tr&gt;&quot;" />
+              </DTS:ObjectData>
+            </DTS:Executable>
           </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Sequence Container\Process 3.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{BFAF1A9A-45B7-4905-8BAD-27C4A5D79E9F}"
+              DTS:From="Package\Sequence Container\Process 3\Analysis Services Processing Task"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Sequence Container\Process 3\Expression Task" />
+          </DTS:PrecedenceConstraints>
           <DTS:ForEachVariableMappings>
             <DTS:ForEachVariableMapping
               DTS:CreationName=""
@@ -2351,6 +2549,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           DTS:Description="Foreach Loop Container"
           DTS:DTSID="{51bdc2fc-6c42-42a2-9e5f-e993a80fc9b6}"
           DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:ForceExecutionResult="0"
           DTS:LocaleID="-1"
           DTS:ObjectName="Process 4">
           <DTS:ForEachEnumerator
@@ -2379,13 +2578,76 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
                 DTS:Name="ConnectionName">"Model_Process_Connection"</DTS:PropertyExpression>
               <DTS:PropertyExpression
                 DTS:Name="ProcessingCommands">"{ "+ " \""+"refresh"+ "\""+": { "+ " \""+"type"+ "\""+": "+ " \""+"full"+ "\""+", "+ " \""+"objects"+ "\""+": [ { "+ " \""+"database"+ "\""+": "+ " \""+ @[User::Model] + "\""+", "+ " \""+"table"+ "\""+": "+ " \""+ @[User::TableName4] + "\""+" } ] } }"</DTS:PropertyExpression>
+              <DTS:EventHandlers>
+                <DTS:EventHandler
+                  DTS:refId="Package\Sequence Container\Process 4\Analysis Services Processing Task.EventHandlers[OnError]"
+                  DTS:CreationName="OnError"
+                  DTS:DTSID="{7576D729-A7F2-46E2-988F-204A61FE7692}"
+                  DTS:EventID="7340144"
+                  DTS:EventName="OnError"
+                  DTS:LocaleID="-1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:Description="The propagate property of the event"
+                      DTS:DTSID="{32801522-2E11-4A28-86C2-EE7DD88FF1E1}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="System"
+                      DTS:ObjectName="Propagate">
+                      <DTS:VariableValue
+                        DTS:DataType="11">-1</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:Executables>
+                    <DTS:Executable
+                      DTS:refId="Package\Sequence Container\Process 4\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+                      DTS:CreationName="Microsoft.ExpressionTask"
+                      DTS:Description="Expression Task"
+                      DTS:DTSID="{4d082cd4-0d0b-4188-bd51-fd07c7a358c4}"
+                      DTS:ExecutableType="Microsoft.ExpressionTask"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Expression Task">
+                      <DTS:Variables />
+                      <DTS:ObjectData>
+                        <ExpressionTask
+                          Expression="@[User::Process4_log]= @[User::Process4_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName4]+&quot;&lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;" />
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                  </DTS:Executables>
+                </DTS:EventHandler>
+              </DTS:EventHandlers>
               <DTS:ObjectData>
                 <ASProcessingData
                   ConnectionName="Model_Process_Connection"
                   ProcessingCommands="{  &quot;refresh&quot;: {  &quot;type&quot;:  &quot;full&quot;,  &quot;objects&quot;: [ {  &quot;database&quot;:  &quot;Sample_data&quot;,  &quot;table&quot;:  &quot;&quot; } ] } }" />
               </DTS:ObjectData>
             </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Sequence Container\Process 4\Expression Task"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{a138f4e5-0f9f-4a7e-8a55-c11cb18ceda1}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Expression Task"
+              DTS:ThreadHint="7">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::Process4_log]= @[User::Process4_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName4]+&quot;&lt;/td&gt;&lt;td&gt; Completed Successfully &lt;/td&gt;&lt;/tr&gt;&quot;" />
+              </DTS:ObjectData>
+            </DTS:Executable>
           </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Sequence Container\Process 4.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{38A13F29-D8B2-47B0-A36E-F10BD0438903}"
+              DTS:From="Package\Sequence Container\Process 4\Analysis Services Processing Task"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Sequence Container\Process 4\Expression Task" />
+          </DTS:PrecedenceConstraints>
           <DTS:ForEachVariableMappings>
             <DTS:ForEachVariableMapping
               DTS:CreationName=""
@@ -2401,6 +2663,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           DTS:Description="Foreach Loop Container"
           DTS:DTSID="{d02e9b0b-aa17-4232-8c32-e0f87606d369}"
           DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:ForceExecutionResult="0"
           DTS:LocaleID="-1"
           DTS:ObjectName="Process 5">
           <DTS:ForEachEnumerator
@@ -2429,13 +2692,76 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
                 DTS:Name="ConnectionName">"Model_Process_Connection"</DTS:PropertyExpression>
               <DTS:PropertyExpression
                 DTS:Name="ProcessingCommands">"{ "+ " \""+"refresh"+ "\""+": { "+ " \""+"type"+ "\""+": "+ " \""+"full"+ "\""+", "+ " \""+"objects"+ "\""+": [ { "+ " \""+"database"+ "\""+": "+ " \""+ @[User::Model] + "\""+", "+ " \""+"table"+ "\""+": "+ " \""+ @[User::TableName5] + "\""+" } ] } }"</DTS:PropertyExpression>
+              <DTS:EventHandlers>
+                <DTS:EventHandler
+                  DTS:refId="Package\Sequence Container\Process 5\Analysis Services Processing Task.EventHandlers[OnError]"
+                  DTS:CreationName="OnError"
+                  DTS:DTSID="{E92B79EC-0C7F-42D2-A108-B990E8BC6908}"
+                  DTS:EventID="16776176"
+                  DTS:EventName="OnError"
+                  DTS:LocaleID="-1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:Description="The propagate property of the event"
+                      DTS:DTSID="{7CDF4FE5-5708-4600-82C2-8EE61E29C939}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="System"
+                      DTS:ObjectName="Propagate">
+                      <DTS:VariableValue
+                        DTS:DataType="11">-1</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:Executables>
+                    <DTS:Executable
+                      DTS:refId="Package\Sequence Container\Process 5\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+                      DTS:CreationName="Microsoft.ExpressionTask"
+                      DTS:Description="Expression Task"
+                      DTS:DTSID="{1d1dd96b-73f1-40d9-9a14-70fffea3a7ca}"
+                      DTS:ExecutableType="Microsoft.ExpressionTask"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Expression Task">
+                      <DTS:Variables />
+                      <DTS:ObjectData>
+                        <ExpressionTask
+                          Expression="@[User::Process5_log]= @[User::Process5_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName5]+&quot;&lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;" />
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                  </DTS:Executables>
+                </DTS:EventHandler>
+              </DTS:EventHandlers>
               <DTS:ObjectData>
                 <ASProcessingData
                   ConnectionName="Model_Process_Connection"
                   ProcessingCommands="{  &quot;refresh&quot;: {  &quot;type&quot;:  &quot;full&quot;,  &quot;objects&quot;: [ {  &quot;database&quot;:  &quot;Sample_data&quot;,  &quot;table&quot;:  &quot;&quot; } ] } }" />
               </DTS:ObjectData>
             </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Sequence Container\Process 5\Expression Task"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{13c74db8-1b2f-459e-9f6f-b52154191a8b}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Expression Task"
+              DTS:ThreadHint="8">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::Process5_log]= @[User::Process5_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName5]+&quot;&lt;/td&gt;&lt;td&gt; Completed Successfully &lt;/td&gt;&lt;/tr&gt;&quot;" />
+              </DTS:ObjectData>
+            </DTS:Executable>
           </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Sequence Container\Process 5.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{3AEDC9E3-90B3-4B94-BC2C-FAA0FE80E2BF}"
+              DTS:From="Package\Sequence Container\Process 5\Analysis Services Processing Task"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Sequence Container\Process 5\Expression Task" />
+          </DTS:PrecedenceConstraints>
           <DTS:ForEachVariableMappings>
             <DTS:ForEachVariableMapping
               DTS:CreationName=""
@@ -2451,6 +2777,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           DTS:Description="Foreach Loop Container"
           DTS:DTSID="{d73623b6-eabb-49e5-8fa0-4de084d20a43}"
           DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:ForceExecutionResult="0"
           DTS:LocaleID="-1"
           DTS:ObjectName="Process 6">
           <DTS:ForEachEnumerator
@@ -2479,6 +2806,44 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
                 DTS:Name="ConnectionName">"Model_Process_Connection"</DTS:PropertyExpression>
               <DTS:PropertyExpression
                 DTS:Name="ProcessingCommands">"{ "+ " \""+"refresh"+ "\""+": { "+ " \""+"type"+ "\""+": "+ " \""+"full"+ "\""+", "+ " \""+"objects"+ "\""+": [ { "+ " \""+"database"+ "\""+": "+ " \""+ @[User::Model] + "\""+", "+ " \""+"table"+ "\""+": "+ " \""+ @[User::TableName6] + "\""+" } ] } }"</DTS:PropertyExpression>
+              <DTS:EventHandlers>
+                <DTS:EventHandler
+                  DTS:refId="Package\Sequence Container\Process 6\Analysis Services Processing Task.EventHandlers[OnError]"
+                  DTS:CreationName="OnError"
+                  DTS:DTSID="{41A371EF-121B-4C0E-BAAC-02EC4FC9FE17}"
+                  DTS:EventID="7340144"
+                  DTS:EventName="OnError"
+                  DTS:LocaleID="-1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:Description="The propagate property of the event"
+                      DTS:DTSID="{27A85872-E5BB-4896-B846-22D4E4EB2281}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="System"
+                      DTS:ObjectName="Propagate">
+                      <DTS:VariableValue
+                        DTS:DataType="11">-1</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:Executables>
+                    <DTS:Executable
+                      DTS:refId="Package\Sequence Container\Process 6\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+                      DTS:CreationName="Microsoft.ExpressionTask"
+                      DTS:Description="Expression Task"
+                      DTS:DTSID="{f06c0fae-f68b-4b2a-ba2f-c9d06a2e22c1}"
+                      DTS:ExecutableType="Microsoft.ExpressionTask"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Expression Task">
+                      <DTS:Variables />
+                      <DTS:ObjectData>
+                        <ExpressionTask
+                          Expression="@[User::Process6_log]= @[User::Process6_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName6]+&quot;&lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;" />
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                  </DTS:Executables>
+                </DTS:EventHandler>
+              </DTS:EventHandlers>
               <DTS:ObjectData>
                 <ASProcessingData
                   ConnectionName="Model_Process_Connection"
@@ -2526,6 +2891,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           DTS:Description="Foreach Loop Container"
           DTS:DTSID="{3f7de104-30e9-4d61-aa5d-6413bf0b96c7}"
           DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:ForceExecutionResult="0"
           DTS:LocaleID="-1"
           DTS:ObjectName="Process 7">
           <DTS:ForEachEnumerator
@@ -2554,13 +2920,76 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
                 DTS:Name="ConnectionName">"Model_Process_Connection"</DTS:PropertyExpression>
               <DTS:PropertyExpression
                 DTS:Name="ProcessingCommands">"{ "+ " \""+"refresh"+ "\""+": { "+ " \""+"type"+ "\""+": "+ " \""+"full"+ "\""+", "+ " \""+"objects"+ "\""+": [ { "+ " \""+"database"+ "\""+": "+ " \""+ @[User::Model] + "\""+", "+ " \""+"table"+ "\""+": "+ " \""+ @[User::TableName7] + "\""+" } ] } }"</DTS:PropertyExpression>
+              <DTS:EventHandlers>
+                <DTS:EventHandler
+                  DTS:refId="Package\Sequence Container\Process 7\Analysis Services Processing Task.EventHandlers[OnError]"
+                  DTS:CreationName="OnError"
+                  DTS:DTSID="{3A219FFB-B5B9-43E5-8465-BADD5D05FA8A}"
+                  DTS:EventID="0"
+                  DTS:EventName="OnError"
+                  DTS:LocaleID="-1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:Description="The propagate property of the event"
+                      DTS:DTSID="{115B7A40-B221-4842-B656-F154208AA4DD}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="System"
+                      DTS:ObjectName="Propagate">
+                      <DTS:VariableValue
+                        DTS:DataType="11">-1</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:Executables>
+                    <DTS:Executable
+                      DTS:refId="Package\Sequence Container\Process 7\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+                      DTS:CreationName="Microsoft.ExpressionTask"
+                      DTS:Description="Expression Task"
+                      DTS:DTSID="{53e60147-9380-4402-bc57-9fbae87ec7f8}"
+                      DTS:ExecutableType="Microsoft.ExpressionTask"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Expression Task">
+                      <DTS:Variables />
+                      <DTS:ObjectData>
+                        <ExpressionTask
+                          Expression="@[User::Process7_log]= @[User::Process7_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName7]+&quot;&lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;" />
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                  </DTS:Executables>
+                </DTS:EventHandler>
+              </DTS:EventHandlers>
               <DTS:ObjectData>
                 <ASProcessingData
                   ConnectionName="Model_Process_Connection"
                   ProcessingCommands="{  &quot;refresh&quot;: {  &quot;type&quot;:  &quot;full&quot;,  &quot;objects&quot;: [ {  &quot;database&quot;:  &quot;Sample_data&quot;,  &quot;table&quot;:  &quot;&quot; } ] } }" />
               </DTS:ObjectData>
             </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Sequence Container\Process 7\Expression Task"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{9ba8793e-198a-4bab-b06f-4ac16955e81e}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Expression Task"
+              DTS:ThreadHint="3">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::Process7_log]= @[User::Process7_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName7]+&quot;&lt;/td&gt;&lt;td&gt; Completed Successfully &lt;/td&gt;&lt;/tr&gt;&quot;" />
+              </DTS:ObjectData>
+            </DTS:Executable>
           </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Sequence Container\Process 7.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{C125B19B-4783-49A8-8AC9-32E945C172B4}"
+              DTS:From="Package\Sequence Container\Process 7\Analysis Services Processing Task"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Sequence Container\Process 7\Expression Task" />
+          </DTS:PrecedenceConstraints>
           <DTS:ForEachVariableMappings>
             <DTS:ForEachVariableMapping
               DTS:CreationName=""
@@ -2576,6 +3005,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           DTS:Description="Foreach Loop Container"
           DTS:DTSID="{6d2cd1de-2df7-4d1a-9375-fde8faaeaa0f}"
           DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:ForceExecutionResult="0"
           DTS:LocaleID="-1"
           DTS:ObjectName="Process 8">
           <DTS:ForEachEnumerator
@@ -2604,13 +3034,76 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
                 DTS:Name="ConnectionName">"Model_Process_Connection"</DTS:PropertyExpression>
               <DTS:PropertyExpression
                 DTS:Name="ProcessingCommands">"{ "+ " \""+"refresh"+ "\""+": { "+ " \""+"type"+ "\""+": "+ " \""+"full"+ "\""+", "+ " \""+"objects"+ "\""+": [ { "+ " \""+"database"+ "\""+": "+ " \""+ @[User::Model] + "\""+", "+ " \""+"table"+ "\""+": "+ " \""+ @[User::TableName8] + "\""+" } ] } }"</DTS:PropertyExpression>
+              <DTS:EventHandlers>
+                <DTS:EventHandler
+                  DTS:refId="Package\Sequence Container\Process 8\Analysis Services Processing Task.EventHandlers[OnError]"
+                  DTS:CreationName="OnError"
+                  DTS:DTSID="{6E50E96E-AB1B-4592-B841-3A91A97507A2}"
+                  DTS:EventID="6291552"
+                  DTS:EventName="OnError"
+                  DTS:LocaleID="-1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:Description="The propagate property of the event"
+                      DTS:DTSID="{A8258F45-2E03-44D0-863C-D26B15CAF5ED}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="System"
+                      DTS:ObjectName="Propagate">
+                      <DTS:VariableValue
+                        DTS:DataType="11">-1</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:Executables>
+                    <DTS:Executable
+                      DTS:refId="Package\Sequence Container\Process 8\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+                      DTS:CreationName="Microsoft.ExpressionTask"
+                      DTS:Description="Expression Task"
+                      DTS:DTSID="{982562b7-05e6-4157-abcd-64e82716045d}"
+                      DTS:ExecutableType="Microsoft.ExpressionTask"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Expression Task">
+                      <DTS:Variables />
+                      <DTS:ObjectData>
+                        <ExpressionTask
+                          Expression="@[User::Process8_log]= @[User::Process8_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName8]+&quot;&lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;" />
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                  </DTS:Executables>
+                </DTS:EventHandler>
+              </DTS:EventHandlers>
               <DTS:ObjectData>
                 <ASProcessingData
                   ConnectionName="Model_Process_Connection"
                   ProcessingCommands="{  &quot;refresh&quot;: {  &quot;type&quot;:  &quot;full&quot;,  &quot;objects&quot;: [ {  &quot;database&quot;:  &quot;Sample_data&quot;,  &quot;table&quot;:  &quot;&quot; } ] } }" />
               </DTS:ObjectData>
             </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Sequence Container\Process 8\Expression Task"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{fb8410dd-6644-45eb-8ff2-5ecf22ef28d4}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Expression Task"
+              DTS:ThreadHint="4">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::Process8_log]= @[User::Process8_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName8]+&quot;&lt;/td&gt;&lt;td&gt; Completed Successfully &lt;/td&gt;&lt;/tr&gt;&quot;" />
+              </DTS:ObjectData>
+            </DTS:Executable>
           </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Sequence Container\Process 8.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{40760CF2-173B-4A9F-B9B5-DB906068C8B2}"
+              DTS:From="Package\Sequence Container\Process 8\Analysis Services Processing Task"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Sequence Container\Process 8\Expression Task" />
+          </DTS:PrecedenceConstraints>
           <DTS:ForEachVariableMappings>
             <DTS:ForEachVariableMapping
               DTS:CreationName=""
@@ -2626,6 +3119,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           DTS:Description="Foreach Loop Container"
           DTS:DTSID="{38bd222f-7985-4157-b6a6-73ed0de2f376}"
           DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:ForceExecutionResult="0"
           DTS:LocaleID="-1"
           DTS:ObjectName="Process 9">
           <DTS:ForEachEnumerator
@@ -2654,13 +3148,76 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
                 DTS:Name="ConnectionName">"Model_Process_Connection"</DTS:PropertyExpression>
               <DTS:PropertyExpression
                 DTS:Name="ProcessingCommands">"{ "+ " \""+"refresh"+ "\""+": { "+ " \""+"type"+ "\""+": "+ " \""+"full"+ "\""+", "+ " \""+"objects"+ "\""+": [ { "+ " \""+"database"+ "\""+": "+ " \""+ @[User::Model] + "\""+", "+ " \""+"table"+ "\""+": "+ " \""+ @[User::TableName9] + "\""+" } ] } }"</DTS:PropertyExpression>
+              <DTS:EventHandlers>
+                <DTS:EventHandler
+                  DTS:refId="Package\Sequence Container\Process 9\Analysis Services Processing Task.EventHandlers[OnError]"
+                  DTS:CreationName="OnError"
+                  DTS:DTSID="{542E3ABC-A0A7-42CD-BEBA-AEABBE3B6D58}"
+                  DTS:EventID="7340144"
+                  DTS:EventName="OnError"
+                  DTS:LocaleID="-1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:Description="The propagate property of the event"
+                      DTS:DTSID="{7B37E945-1719-48E3-AAC4-7DC0051D8BFA}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="System"
+                      DTS:ObjectName="Propagate">
+                      <DTS:VariableValue
+                        DTS:DataType="11">-1</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:Executables>
+                    <DTS:Executable
+                      DTS:refId="Package\Sequence Container\Process 9\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+                      DTS:CreationName="Microsoft.ExpressionTask"
+                      DTS:Description="Expression Task"
+                      DTS:DTSID="{32ef8519-da10-43d5-8731-923d6f6cbcd0}"
+                      DTS:ExecutableType="Microsoft.ExpressionTask"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Expression Task">
+                      <DTS:Variables />
+                      <DTS:ObjectData>
+                        <ExpressionTask
+                          Expression="@[User::Process9_log]= @[User::Process9_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName9]+&quot;&lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;" />
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                  </DTS:Executables>
+                </DTS:EventHandler>
+              </DTS:EventHandlers>
               <DTS:ObjectData>
                 <ASProcessingData
                   ConnectionName="Model_Process_Connection"
                   ProcessingCommands="{  &quot;refresh&quot;: {  &quot;type&quot;:  &quot;full&quot;,  &quot;objects&quot;: [ {  &quot;database&quot;:  &quot;Sample_data&quot;,  &quot;table&quot;:  &quot;&quot; } ] } }" />
               </DTS:ObjectData>
             </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Sequence Container\Process 9\Expression Task"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{27f880c5-edfc-4d8a-bd46-2a386000c35d}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Expression Task"
+              DTS:ThreadHint="5">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::Process9_log]= @[User::Process9_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::TableName9]+&quot;&lt;/td&gt;&lt;td&gt; Completed Successfully &lt;/td&gt;&lt;/tr&gt;&quot;" />
+              </DTS:ObjectData>
+            </DTS:Executable>
           </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Sequence Container\Process 9.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{6261E2D7-3AAA-4D2F-B5C6-411520748F05}"
+              DTS:From="Package\Sequence Container\Process 9\Analysis Services Processing Task"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Sequence Container\Process 9\Expression Task" />
+          </DTS:PrecedenceConstraints>
           <DTS:ForEachVariableMappings>
             <DTS:ForEachVariableMapping
               DTS:CreationName=""
@@ -3427,27 +3984,27 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
         <NodeLayout
           Size="163,42"
           Id="Package\List of Tables"
-          TopLeft="426.214285714286,58.7857142857143" />
+          TopLeft="444.964285714286,57.5357142857143" />
         <NodeLayout
           Size="216,42"
           Id="Package\Process Allocation"
-          TopLeft="401.214285714286,129.357142857143" />
+          TopLeft="419.964285714286,128.107142857143" />
         <NodeLayout
           Size="106,42"
           Id="Package\Script"
-          TopLeft="449.25,1391.91666666667" />
+          TopLeft="479.25,1394.41666666667" />
         <NodeLayout
           Size="131,42"
           Id="Package\Sequence Container\Count Check"
-          TopLeft="378,153.5" />
+          TopLeft="410.5,193.5" />
         <NodeLayout
           Size="131,42"
           Id="Package\Sequence Container\Count Check 1"
-          TopLeft="380,546.214285714286" />
+          TopLeft="408.75,587.464285714286" />
         <NodeLayout
           Size="131,42"
           Id="Package\Sequence Container\Count Check 2"
-          TopLeft="361.5,830.464285714286" />
+          TopLeft="419,971.714285714286" />
         <NodeLayout
           Size="237,42"
           Id="Package\Sequence Container\Process 1\Analysis Services Processing Task"
@@ -3495,13 +4052,45 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           Size="237,42"
           Id="Package\Sequence Container\Process 10\Analysis Services Processing Task"
           TopLeft="48.7142857142858,15.0357142857142" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 10\Expression Task"
+          TopLeft="93.7142857142858,79.5357142857142" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Process 10.PrecedenceConstraints[Constraint]"
+          TopLeft="167.214285714286,57.0357142857142">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="81.5,43.5"
+              Start="0,0"
+              End="74,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,39.5"
+                    Point2="0,43.5"
+                    Point3="4,43.5" />
+                  <mssgle:LineSegment
+                    End="74,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="322,116"
-          Size="322,159"
+          PanelSize="322,159"
+          Size="322,202"
           Id="Package\Sequence Container\Process 10"
-          TopLeft="487.642857142857,903.714285714286" />
+          TopLeft="595.142857142857,887.464285714286" />
         <NodeLayout
           Size="237,42"
           Id="Package\Sequence Container\Process 2\Analysis Services Processing Task"
@@ -3535,43 +4124,133 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="340,140"
+          PanelSize="340,141"
           Size="340,184"
           Id="Package\Sequence Container\Process 2"
-          TopLeft="35.0714285714287,268.821428571429" />
+          TopLeft="32.5714285714287,241.321428571429" />
         <NodeLayout
           Size="237,42"
           Id="Package\Sequence Container\Process 3\Analysis Services Processing Task"
-          TopLeft="38.7142857142857,62.7142857142857" />
+          TopLeft="42.4642857142857,17.7142857142857" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 3\Expression Task"
+          TopLeft="94.9642857142857,78.4642857142857" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Process 3.PrecedenceConstraints[Constraint]"
+          TopLeft="160.964285714286,59.7142857142857">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="89,39.75"
+              Start="0,0"
+              End="81.5,39.75">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.75"
+                    Point2="0,39.75"
+                    Point3="4,39.75" />
+                  <mssgle:LineSegment
+                    End="81.5,39.75" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="339,113"
-          Size="339,156"
+          PanelSize="339,141"
+          Size="339,184"
           Id="Package\Sequence Container\Process 3"
-          TopLeft="36.8214285714284,470.571428571428" />
+          TopLeft="34.3214285714284,460.571428571428" />
         <NodeLayout
           Size="237,42"
           Id="Package\Sequence Container\Process 4\Analysis Services Processing Task"
           TopLeft="41.2142857142858,15.0357142857143" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 4\Expression Task"
+          TopLeft="92.4642857142858,77.0357142857142" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Process 4.PrecedenceConstraints[Constraint]"
+          TopLeft="159.714285714286,57.0357142857143">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="87.75,40.9999999999999"
+              Start="0,0"
+              End="80.25,40.9999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.9999999999999" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36.9999999999999"
+                    Point2="0,40.9999999999999"
+                    Point3="4,40.9999999999999" />
+                  <mssgle:LineSegment
+                    End="80.25,40.9999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="337,114"
-          Size="337,157"
+          PanelSize="337,140"
+          Size="337,183"
           Id="Package\Sequence Container\Process 4"
-          TopLeft="35.8571428571425,665.392857142857" />
+          TopLeft="37.1071428571425,669.142857142857" />
         <NodeLayout
           Size="237,42"
           Id="Package\Sequence Container\Process 5\Analysis Services Processing Task"
           TopLeft="44.9642857142858,18.7857142857142" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 5\Expression Task"
+          TopLeft="92.4642857142858,85.7857142857142" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Process 5.PrecedenceConstraints[Constraint]"
+          TopLeft="166.714285714286,60.7857142857142">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25"
+              Start="0,0"
+              End="0,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="337,116"
-          Size="337,159"
+          PanelSize="337,148"
+          Size="337,191"
           Id="Package\Sequence Container\Process 5"
-          TopLeft="29.5714285714286,895.821428571429" />
+          TopLeft="33.3214285714286,889.571428571429" />
         <NodeLayout
           Size="237,42"
           Id="Package\Sequence Container\Process 6\Analysis Services Processing Task"
@@ -3611,196 +4290,292 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="325,126"
-          Size="325,169"
+          PanelSize="332,131"
+          Size="332,174"
           Id="Package\Sequence Container\Process 6"
-          TopLeft="548.142857142857,16.3928571428573" />
+          TopLeft="589.392857142857,16.3928571428573" />
         <NodeLayout
           Size="237,42"
           Id="Package\Sequence Container\Process 7\Analysis Services Processing Task"
           TopLeft="38.7142857142858,11.2857142857143" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="301,116"
-          Size="301,159"
-          Id="Package\Sequence Container\Process 7"
-          TopLeft="551.964285714286,275.357142857143" />
         <NodeLayout
-          Size="237,42"
-          Id="Package\Sequence Container\Process 8\Analysis Services Processing Task"
-          TopLeft="38.7142857142858,61.2857142857143" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="301,116"
-          Size="301,159"
-          Id="Package\Sequence Container\Process 8"
-          TopLeft="561.428571428571,469.928571428572" />
-        <NodeLayout
-          Size="237,42"
-          Id="Package\Sequence Container\Process 9\Analysis Services Processing Task"
-          TopLeft="44.9642857142858,17.5357142857143" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="331,125"
-          Size="331,168"
-          Id="Package\Sequence Container\Process 9"
-          TopLeft="544.464285714286,656.785714285714" />
+          Size="155,42"
+          Id="Package\Sequence Container\Process 7\Expression Task"
+          TopLeft="68.7142857142858,78.2857142857143" />
         <EdgeLayout
-          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
-          TopLeft="464,195.5">
+          Id="Package\Sequence Container\Process 7.PrecedenceConstraints[Constraint]"
+          TopLeft="157.214285714286,53.2857142857143">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="238.464285714286,79.857142857143"
+              EndConnector="-11,25"
               Start="0,0"
-              End="238.464285714286,72.357142857143">
+              End="-11,17.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,28.5210084033614" />
+                    End="0,8.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,28.5210084033614"
-                    Point2="0,32.5210084033614"
-                    Point3="4,32.5210084033614" />
+                    Point1="0,8.5"
+                    Point2="0,12.5"
+                    Point3="-4,12.5" />
                   <mssgle:LineSegment
-                    End="234.464285714286,32.5210084033614" />
+                    End="-7,12.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="234.464285714286,32.5210084033614"
-                    Point2="238.464285714286,32.5210084033614"
-                    Point3="238.464285714286,36.5210084033614" />
+                    Point1="-7,12.5"
+                    Point2="-11,12.5"
+                    Point3="-11,16.5" />
                   <mssgle:LineSegment
-                    End="238.464285714286,72.357142857143" />
+                    End="-11,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="328,133"
+          Size="328,176"
+          Id="Package\Sequence Container\Process 7"
+          TopLeft="588.214285714286,247.857142857143" />
+        <NodeLayout
+          Size="237,42"
+          Id="Package\Sequence Container\Process 8\Analysis Services Processing Task"
+          TopLeft="34.9642857142858,20.0357142857143" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 8\Expression Task"
+          TopLeft="64.9642857142858,82.0357142857143" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Process 8.PrecedenceConstraints[Constraint]"
+          TopLeft="153.464285714286,62.0357142857143">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="66.5,41"
+              Start="0,0"
+              End="59,41">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37"
+                    Point2="0,41"
+                    Point3="4,41" />
+                  <mssgle:LineSegment
+                    End="59,41" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="341,133"
+          Size="341,176"
+          Id="Package\Sequence Container\Process 8"
+          TopLeft="590.178571428571,454.928571428572" />
+        <NodeLayout
+          Size="237,42"
+          Id="Package\Sequence Container\Process 9\Analysis Services Processing Task"
+          TopLeft="44.9642857142858,17.5357142857143" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 9\Expression Task"
+          TopLeft="89.9642857142858,85.7857142857142" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Process 9.PrecedenceConstraints[Constraint]"
+          TopLeft="165.464285714286,59.5357142857143">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26.2499999999999"
+              Start="0,0"
+              End="0,18.7499999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.7499999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="338,150"
+          Size="338,193"
+          Id="Package\Sequence Container\Process 9"
+          TopLeft="590.714285714286,663.035714285714" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="541.5,220.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="46.714285714286,115.690476190476"
+              Start="0,0"
+              End="39.214285714286,115.690476190476">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="15.7142857142858,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.7142857142858,0"
+                    Point2="19.7142857142858,0"
+                    Point3="19.7142857142858,4" />
+                  <mssgle:LineSegment
+                    End="19.7142857142858,111.690476190476" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.7142857142858,111.690476190476"
+                    Point2="19.7142857142858,115.690476190476"
+                    Point3="23.7142857142858,115.690476190476" />
+                  <mssgle:LineSegment
+                    End="39.214285714286,115.690476190476" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="111.232142857143,37.5210084033614,16,16"
+              BoundingBox="11.7142857142858,-22,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
-          TopLeft="509,174.5">
+          TopLeft="541.5,214.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="39.142857142857,-73.6071428571427"
+              EndConnector="47.892857142857,-111.107142857143"
               Start="0,0"
-              End="31.642857142857,-73.6071428571427">
+              End="40.392857142857,-111.107142857143">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="15.5714285714285,0" />
+                    End="19.9464285714285,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="15.5714285714285,0"
-                    Point2="19.5714285714285,0"
-                    Point3="19.5714285714285,-4" />
+                    Point1="19.9464285714285,0"
+                    Point2="23.9464285714285,0"
+                    Point3="23.9464285714285,-4" />
                   <mssgle:LineSegment
-                    End="19.5714285714285,-69.6071428571427" />
+                    End="23.9464285714285,-107.107142857143" />
                   <mssgle:CubicBezierSegment
-                    Point1="19.5714285714285,-69.6071428571427"
-                    Point2="19.5714285714285,-73.6071428571427"
-                    Point3="23.5714285714285,-73.6071428571427" />
+                    Point1="23.9464285714285,-107.107142857143"
+                    Point2="23.9464285714285,-111.107142857143"
+                    Point3="27.9464285714285,-111.107142857143" />
                   <mssgle:LineSegment
-                    End="31.642857142857,-73.6071428571427" />
+                    End="40.392857142857,-111.107142857143" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="11.5714285714285,1,16,16"
+              BoundingBox="15.9464285714285,1,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
-          TopLeft="412.75,195.5">
+          TopLeft="410.5,220.166666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-207.678571428571,73.321428571429"
+              EndConnector="-37.9285714285713,113.154761904762"
               Start="0,0"
-              End="-207.678571428571,65.821428571429">
+              End="-30.4285714285713,113.154761904762">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,21.4156572853582" />
+                    End="-12.0065530799475,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,21.4156572853582"
-                    Point2="0,25.4156572853582"
-                    Point3="-4,25.4156572853582" />
+                    Point1="-12.0065530799475,0"
+                    Point2="-16.0065530799475,0"
+                    Point3="-16.0065530799475,4" />
                   <mssgle:LineSegment
-                    End="-203.678571428571,25.4156572853582" />
+                    End="-16.0065530799475,109.154761904762" />
                   <mssgle:CubicBezierSegment
-                    Point1="-203.678571428571,25.4156572853582"
-                    Point2="-207.678571428571,25.4156572853582"
-                    Point3="-207.678571428571,29.4156572853582" />
+                    Point1="-16.0065530799475,109.154761904762"
+                    Point2="-16.0065530799475,113.154761904762"
+                    Point3="-20.0065530799475,113.154761904762" />
                   <mssgle:LineSegment
-                    End="-207.678571428571,65.821428571429" />
+                    End="-30.4285714285713,113.154761904762" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-111.839285714286,30.4156572853582,16,16"
+              BoundingBox="-24.0065530799475,-22,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
-          TopLeft="412.75,195.5">
+          TopLeft="410.5,214.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-207.25,-10"
+              EndConnector="-32.5,-116.5"
               Start="0,0"
-              End="-207.25,-2.5">
+              End="-25,-116.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,18.5" />
+                    End="-12.25,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,18.5"
-                    Point2="0,22.5"
-                    Point3="-4,22.5" />
+                    Point1="-12.25,0"
+                    Point2="-16.25,0"
+                    Point3="-16.25,-4" />
                   <mssgle:LineSegment
-                    End="-203.25,22.5" />
+                    End="-16.25,-112.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="-203.25,22.5"
-                    Point2="-207.25,22.5"
-                    Point3="-207.25,18.5" />
+                    Point1="-16.25,-112.5"
+                    Point2="-16.25,-116.5"
+                    Point3="-20.25,-116.5" />
                   <mssgle:LineSegment
-                    End="-207.25,-2.5" />
+                    End="-25,-116.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-111.625,27.5,16,16"
+              BoundingBox="-24.25,1,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
-          TopLeft="511,567.214285714286">
+          TopLeft="539.75,608.464285714286">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="50.428571428571,-17.785714285714"
+              EndConnector="50.428571428571,-65.535714285714"
               Start="0,0"
-              End="42.928571428571,-17.785714285714">
+              End="42.928571428571,-65.535714285714">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -3811,13 +4586,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
                     Point2="25.2142857142855,0"
                     Point3="25.2142857142855,-4" />
                   <mssgle:LineSegment
-                    End="25.2142857142855,-13.785714285714" />
+                    End="25.2142857142855,-61.535714285714" />
                   <mssgle:CubicBezierSegment
-                    Point1="25.2142857142855,-13.785714285714"
-                    Point2="25.2142857142855,-17.785714285714"
-                    Point3="29.2142857142855,-17.785714285714" />
+                    Point1="25.2142857142855,-61.535714285714"
+                    Point2="25.2142857142855,-65.535714285714"
+                    Point3="29.2142857142855,-65.535714285714" />
                   <mssgle:LineSegment
-                    End="42.928571428571,-17.785714285714" />
+                    End="42.928571428571,-65.535714285714" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3830,205 +4605,187 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 5]"
-          TopLeft="476.25,588.214285714286">
+          TopLeft="494.75,629.464285714286">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="233.714285714286,68.571428571428"
+              EndConnector="264.964285714286,33.571428571428"
               Start="0,0"
-              End="233.714285714286,61.071428571428">
+              End="264.964285714286,26.071428571428">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,19.7691485571783" />
+                    End="0,9.67162249515167" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,19.7691485571783"
-                    Point2="0,23.7691485571783"
-                    Point3="4,23.7691485571783" />
+                    Point1="0,9.67162249515167"
+                    Point2="0,13.6716224951517"
+                    Point3="4,13.6716224951517" />
                   <mssgle:LineSegment
-                    End="229.714285714286,23.7691485571783" />
+                    End="260.964285714286,13.6716224951517" />
                   <mssgle:CubicBezierSegment
-                    Point1="229.714285714286,23.7691485571783"
-                    Point2="233.714285714286,23.7691485571783"
-                    Point3="233.714285714286,27.7691485571783" />
+                    Point1="260.964285714286,13.6716224951517"
+                    Point2="264.964285714286,13.6716224951517"
+                    Point3="264.964285714286,17.6716224951517" />
                   <mssgle:LineSegment
-                    End="233.714285714286,61.071428571428" />
+                    End="264.964285714286,26.071428571428" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="108.857142857143,28.7691485571783,16,16"
+              BoundingBox="124.482142857143,18.6716224951517,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 6]"
-          TopLeft="445.5,588.214285714286">
+          TopLeft="408.75,608.464285714286">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-239.178571428572,38.357142857142"
+              EndConnector="-35.4285714285716,-55.892857142858"
               Start="0,0"
-              End="-239.178571428572,45.857142857142">
+              End="-27.9285714285716,-55.892857142858">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,56.857142857142" />
+                    End="-13.7142857142858,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,56.857142857142"
-                    Point2="0,60.857142857142"
-                    Point3="-4,60.857142857142" />
+                    Point1="-13.7142857142858,0"
+                    Point2="-17.7142857142858,0"
+                    Point3="-17.7142857142858,-4" />
                   <mssgle:LineSegment
-                    End="-235.178571428572,60.857142857142" />
+                    End="-17.7142857142858,-51.892857142858" />
                   <mssgle:CubicBezierSegment
-                    Point1="-235.178571428572,60.857142857142"
-                    Point2="-239.178571428572,60.857142857142"
-                    Point3="-239.178571428572,56.857142857142" />
+                    Point1="-17.7142857142858,-51.892857142858"
+                    Point2="-17.7142857142858,-55.892857142858"
+                    Point3="-21.7142857142858,-55.892857142858" />
                   <mssgle:LineSegment
-                    End="-239.178571428572,45.857142857142" />
+                    End="-27.9285714285716,-55.892857142858" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-127.589285714286,65.857142857142,16,16"
+              BoundingBox="-25.7142857142858,1,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 7]"
-          TopLeft="425,588.214285714286">
+          TopLeft="453.75,629.464285714286">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-220.642857142858,77.178571428571"
+              EndConnector="-248.142857142858,39.678571428571"
               Start="0,0"
-              End="-220.642857142858,69.678571428571">
+              End="-248.142857142858,32.178571428571">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,27.430187459599" />
+                    End="0,12.1586942469294" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,27.430187459599"
-                    Point2="0,31.430187459599"
-                    Point3="-4,31.430187459599" />
+                    Point1="0,12.1586942469294"
+                    Point2="0,16.1586942469294"
+                    Point3="-4,16.1586942469294" />
                   <mssgle:LineSegment
-                    End="-216.642857142858,31.430187459599" />
+                    End="-244.142857142858,16.1586942469294" />
                   <mssgle:CubicBezierSegment
-                    Point1="-216.642857142858,31.430187459599"
-                    Point2="-220.642857142858,31.430187459599"
-                    Point3="-220.642857142858,35.430187459599" />
+                    Point1="-244.142857142858,16.1586942469294"
+                    Point2="-248.142857142858,16.1586942469294"
+                    Point3="-248.142857142858,20.1586942469294" />
                   <mssgle:LineSegment
-                    End="-220.642857142858,69.678571428571" />
+                    End="-248.142857142858,32.178571428571" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-118.321428571429,36.430187459599,16,16"
+              BoundingBox="-132.071428571429,21.1586942469294,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 8]"
-          TopLeft="406.5,872.464285714286">
+          TopLeft="419,988.892857142857">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-208.428571428571,23.3571428571429"
+              EndConnector="-48.6785714285714,0"
               Start="0,0"
-              End="-208.428571428571,15.8571428571429">
+              End="-41.1785714285714,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,5.5119586296057" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,5.5119586296057"
-                    Point2="0,9.5119586296057"
-                    Point3="-4,9.5119586296057" />
-                  <mssgle:LineSegment
-                    End="-204.428571428571,9.5119586296057" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-204.428571428571,9.5119586296057"
-                    Point2="-208.428571428571,9.5119586296057"
-                    Point3="-208.428571428571,13.5119586296057" />
-                  <mssgle:LineSegment
-                    End="-208.428571428571,15.8571428571429" />
+                    End="-41.1785714285714,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-112.214285714286,14.5119586296057,16,16"
+              BoundingBox="-28.5892857142857,5,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 9]"
-          TopLeft="447.5,872.464285714286">
+          TopLeft="550,990.589285714286">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="201.142857142857,31.25"
+              EndConnector="45.142857142857,0"
               Start="0,0"
-              End="201.142857142857,23.75">
+              End="37.642857142857,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8.7262443438914" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,8.7262443438914"
-                    Point2="0,12.7262443438914"
-                    Point3="4,12.7262443438914" />
-                  <mssgle:LineSegment
-                    End="197.142857142857,12.7262443438914" />
-                  <mssgle:CubicBezierSegment
-                    Point1="197.142857142857,12.7262443438914"
-                    Point2="201.142857142857,12.7262443438914"
-                    Point3="201.142857142857,16.7262443438914" />
-                  <mssgle:LineSegment
-                    End="201.142857142857,23.75" />
+                    End="37.642857142857,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="92.5714285714285,17.7262443438914,16,16"
+              BoundingBox="10.8214285714285,5,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="897,1118"
-          Size="897,1161"
+          PanelSize="960,1144"
+          Size="960,1187"
           Id="Package\Sequence Container"
-          TopLeft="54.6190476190479,198.452380952381" />
+          TopLeft="53.3690476190479,195.952380952381" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="502.684523809524,1359.45238095238">
+          TopLeft="533.369047619048,1382.95238095238">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,32.4642857142858"
+              EndConnector="51.8809523809521,32.4642857142858"
               Start="0,0"
-              End="0,24.9642857142858">
+              End="44.3809523809521,32.4642857142858">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,24.9642857142858" />
+                    End="0,28.4642857142858" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.4642857142858"
+                    Point2="0,32.4642857142858"
+                    Point3="4,32.4642857142858" />
+                  <mssgle:LineSegment
+                    End="44.3809523809521,32.4642857142858" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4039,7 +4796,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="508.464285714286,100.785714285714">
+          TopLeft="527.214285714286,99.535714285714">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4061,18 +4818,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="506.166666666667,171.357142857143">
+          TopLeft="530.666666666667,170.107142857143">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,27.0952380952376"
+              EndConnector="0,25.8452380952376"
               Start="0,0"
-              End="0,19.5952380952376">
+              End="0,18.3452380952376">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,19.5952380952376" />
+                    End="0,18.3452380952376" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4097,6 +4854,126 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           Size="195,42"
           Id="Package.EventHandlers[OnError]\Email on Failuer"
           TopLeft="410,67" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 1\Analysis Services Processing Task.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 1\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+          TopLeft="397,88" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 10\Analysis Services Processing Task.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 10\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 2\Analysis Services Processing Task.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 2\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 3\Analysis Services Processing Task.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 3\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 4\Analysis Services Processing Task.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 4\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 5\Analysis Services Processing Task.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 5\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 6\Analysis Services Processing Task.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 6\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 7\Analysis Services Processing Task.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 7\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 8\Analysis Services Processing Task.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 8\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 9\Analysis Services Processing Task.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 9\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+          TopLeft="60,60" />
       </GraphLayout>
     </LayoutInfo>
   </DtsEventHandler>
