@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="process_all_tabular_ABBBITABULAR"
   DTS:PackageType="5"
-  DTS:VersionBuild="260"
-  DTS:VersionGUID="{D828E398-0720-40CB-9FD9-F55BB8DACF56}">
+  DTS:VersionBuild="262"
+  DTS:VersionGUID="{A08704D2-B7AD-45B6-8667-0691EAAA0D0C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1897,7 +1897,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       <DTS:Variables />
                       <DTS:ObjectData>
                         <ExpressionTask
-                          Expression="@[User::Process1_log]= &quot; Hi Team,&lt;br&gt; &lt;br&gt;The Package &quot; + @[System::PackageName]  + &quot; has completed in &quot; + @[$Project::Environment] + &quot;&lt;br&gt;&#xA;&lt;html&gt;&lt;head&gt;&lt;style&gt; table, th, td { border: 1px solid black;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;br&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Model Name&lt;/th&gt;&lt;th&gt;Start Date&lt;/th&gt;&lt;th&gt;End Date&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;th&gt;Reason &lt;/th&gt;&lt;/tr&gt;&quot;+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::Model1]+&quot;&lt;/td&gt;&lt;td&gt;&quot;+ @[User::StartDate1] +&quot;&lt;/td&gt;&lt;td&gt;&quot;+ @[User::EndDate1] +&quot;&lt;/td&gt;&lt;td&gt; Failed &lt;/td&gt;&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;&#xA;+&quot;&lt;/table&gt;&lt;br&gt;&lt;br&gt;Thank you&lt;/body&gt;&lt;/html&gt;&quot;" />
+                          Expression="@[User::Process1_log]= &quot; Hi Team,&lt;br&gt; &lt;br&gt;The Package &quot; + @[System::PackageName]  + &quot; has completed in &quot; + @[$Project::Environment] + &quot;&lt;br&gt;&#xA;&lt;html&gt;&lt;head&gt;&lt;style&gt; table, th, td { border: 1px solid black;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;br&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Model Name&lt;/th&gt;&lt;th&gt;Start Date&lt;/th&gt;&lt;th&gt;End Date&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;th&gt;Reason &lt;/th&gt;&lt;/tr&gt;&quot;+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::Model1]+&quot;&lt;/td&gt;&lt;td&gt;&quot;+ @[User::StartDate1] +&quot;&lt;/td&gt;&lt;td&gt;&quot;+ @[User::EndDate1] +&quot;&lt;/td&gt;&lt;td&gt; Failed &lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;&#xA;+&quot;&lt;/table&gt;&lt;br&gt;&lt;br&gt;Thank you&lt;/body&gt;&lt;/html&gt;&quot;" />
                       </DTS:ObjectData>
                     </DTS:Executable>
                   </DTS:Executables>
@@ -2570,7 +2570,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                       <DTS:ObjectData>
                         <SQLTask:SqlTaskData
                           SQLTask:Connection="{080841E3-627E-41EC-B87E-77E90DFB6A9B}"
-                          SQLTask:SqlStatementSource="insert into [log].[tabular_model_processing_history] (start_time,end_time,model,outcome)&#xA;   VALUES (?,?,?,'Success');&#xA;exec [sp].[mail] ?,?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                          SQLTask:SqlStatementSource="insert into [log].[tabular_model_processing_history] (start_time,end_time,model,outcome)&#xA;   VALUES (?,?,?,'Failed');&#xA;exec [sp].[mail] ?,?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                           <SQLTask:ParameterBinding
                             SQLTask:ParameterName="0"
                             SQLTask:DtsVariableName="User::StartDate2"
