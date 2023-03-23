@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="process_all_tabular_ABBBITABULAR"
   DTS:PackageType="5"
-  DTS:VersionBuild="326"
-  DTS:VersionGUID="{EB9233E6-725C-4CF7-B5AC-67E99DCD2F0B}">
+  DTS:VersionBuild="327"
+  DTS:VersionGUID="{D399002B-0F71-4984-94B7-91669E75AAD1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -2370,19 +2370,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
                   SQLTask:SqlStatementSource="insert into [log].[tabular_model_processing_history] (start_time,end_time,model,outcome)&#xA;&#x9;&#x9;&#x9;VALUES (?,?,?,'Success');&#xA;exec [sp].[mail] ?,?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
-                    SQLTask:DtsVariableName="User::StartDate7"
+                    SQLTask:DtsVariableName="User::StartDate10"
                     SQLTask:ParameterDirection="Input"
                     SQLTask:DataType="129"
                     SQLTask:ParameterSize="-1" />
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="1"
-                    SQLTask:DtsVariableName="User::EndDate7"
+                    SQLTask:DtsVariableName="User::EndDate10"
                     SQLTask:ParameterDirection="Input"
                     SQLTask:DataType="129"
                     SQLTask:ParameterSize="-1" />
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="2"
-                    SQLTask:DtsVariableName="User::Model7"
+                    SQLTask:DtsVariableName="User::Model10"
                     SQLTask:ParameterDirection="Input"
                     SQLTask:DataType="129"
                     SQLTask:ParameterSize="-1" />
@@ -2406,7 +2406,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
                     SQLTask:ParameterSize="-1" />
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="6"
-                    SQLTask:DtsVariableName="User::Process1_log"
+                    SQLTask:DtsVariableName="User::Process10_log"
                     SQLTask:ParameterDirection="Input"
                     SQLTask:DataType="129"
                     SQLTask:ParameterSize="-1" />
@@ -4903,19 +4903,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
                   SQLTask:SqlStatementSource="insert into [log].[tabular_model_processing_history] (start_time,end_time,model,outcome)&#xA;&#x9;&#x9;&#x9;VALUES (?,?,?,'Success');&#xA;exec [sp].[mail] ?,?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
-                    SQLTask:DtsVariableName="User::StartDate8"
+                    SQLTask:DtsVariableName="User::StartDate9"
                     SQLTask:ParameterDirection="Input"
                     SQLTask:DataType="129"
                     SQLTask:ParameterSize="-1" />
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="1"
-                    SQLTask:DtsVariableName="User::EndDate8"
+                    SQLTask:DtsVariableName="User::EndDate9"
                     SQLTask:ParameterDirection="Input"
                     SQLTask:DataType="129"
                     SQLTask:ParameterSize="-1" />
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="2"
-                    SQLTask:DtsVariableName="User::Model8"
+                    SQLTask:DtsVariableName="User::Model9"
                     SQLTask:ParameterDirection="Input"
                     SQLTask:DataType="129"
                     SQLTask:ParameterSize="-1" />
@@ -4939,7 +4939,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
                     SQLTask:ParameterSize="-1" />
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="6"
-                    SQLTask:DtsVariableName="User::Process8_log"
+                    SQLTask:DtsVariableName="User::Process9_log"
                     SQLTask:ParameterDirection="Input"
                     SQLTask:DataType="129"
                     SQLTask:ParameterSize="-1" />
@@ -4958,7 +4958,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
-                  Expression="@[User::EndDate8] = SUBSTRING((DT_WSTR,30)GETDATE(),1,19)" />
+                  Expression="@[User::EndDate9] = SUBSTRING((DT_WSTR,30)GETDATE(),1,19)" />
               </DTS:ObjectData>
             </DTS:Executable>
             <DTS:Executable
