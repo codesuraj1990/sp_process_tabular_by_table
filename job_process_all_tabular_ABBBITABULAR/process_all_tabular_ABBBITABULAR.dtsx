@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="process_all_tabular_ABBBITABULAR"
   DTS:PackageType="5"
-  DTS:VersionBuild="328"
-  DTS:VersionGUID="{B361C671-9133-48EE-B875-B3CB432A7C80}">
+  DTS:VersionBuild="329"
+  DTS:VersionGUID="{A789584B-4680-4BDA-93E5-EE1F8D822E89}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
