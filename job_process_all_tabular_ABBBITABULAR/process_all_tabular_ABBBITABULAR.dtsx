@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="process_all_tabular_ABBBITABULAR"
   DTS:PackageType="5"
-  DTS:VersionBuild="318"
-  DTS:VersionGUID="{5B3864CD-C253-44CB-9835-1A39A44249B3}">
+  DTS:VersionBuild="325"
+  DTS:VersionGUID="{4CDBB269-CF0C-4BC0-A0A4-62A5EB9F085E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1050,14 +1050,35 @@
           Language="CSharp"
           ReadWriteVariables="User::NumofProcess,User::Process1,User::Process10,User::Process2,User::Process3,User::Process4,User::Process5,User::Process6,User::Process7,User::Process8,User::Process9,User::rwcnt1,User::rwcnt10,User::rwcnt2,User::rwcnt3,User::rwcnt4,User::rwcnt5,User::rwcnt6,User::rwcnt7,User::rwcnt8,User::rwcnt9,User::TableList">
           <ProjectItem
-            Name="Properties\Settings.settings"
-            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+            Name="Properties\AssemblyInfo.cs"
+            Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_6d966aeae64a40c6b4b5fc9f3a596298")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_6d966aeae64a40c6b4b5fc9f3a596298")]
+[assembly: AssemblyCopyright("Copyright @  2023")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
           <ProjectItem
             Name="ST_c2bed1a438e64c6eb6c73f29d24b81f1.csproj"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -1486,35 +1507,14 @@ namespace ST_6d966aeae64a40c6b4b5fc9f3a596298.Properties {
     }
 }]]></ProjectItem>
           <ProjectItem
-            Name="Properties\AssemblyInfo.cs"
-            Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_6d966aeae64a40c6b4b5fc9f3a596298")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_6d966aeae64a40c6b4b5fc9f3a596298")]
-[assembly: AssemblyCopyright("Copyright @  2023")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+            Name="Properties\Settings.settings"
+            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
           <ProjectItem
             Name="Properties\Resources.Designer.cs"
             Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -1750,7 +1750,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           DTS:ExecutableType="Microsoft.ScriptTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Count Check"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <ScriptProject
@@ -1768,7 +1768,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           DTS:ExecutableType="Microsoft.ScriptTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Count Check 1"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <ScriptProject
@@ -1786,7 +1786,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           DTS:ExecutableType="Microsoft.ScriptTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Count Check 2"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <ScriptProject
@@ -1825,7 +1825,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.DTSProcessingTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Analysis Services Processing Task"
-              DTS:ThreadHint="1">
+              DTS:ThreadHint="0">
               <DTS:Variables />
               <DTS:PropertyExpression
                 DTS:Name="ConnectionName">"Model_Process_Connection"</DTS:PropertyExpression>
@@ -2032,7 +2032,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExecuteSQLTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Execute SQL Task"
-              DTS:ThreadHint="1">
+              DTS:ThreadHint="0">
               <DTS:Variables />
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
@@ -2091,7 +2091,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update End time"
-              DTS:ThreadHint="1">
+              DTS:ThreadHint="0">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -2106,7 +2106,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update Log"
-              DTS:ThreadHint="1">
+              DTS:ThreadHint="0">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -2121,7 +2121,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update Start time"
-              DTS:ThreadHint="1">
+              DTS:ThreadHint="0">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -2224,7 +2224,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.DTSProcessingTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Analysis Services Processing Task"
-              DTS:ThreadHint="0">
+              DTS:ThreadHint="2">
               <DTS:Variables />
               <DTS:PropertyExpression
                 DTS:Name="ConnectionName">"Model_Process_Connection"</DTS:PropertyExpression>
@@ -2262,7 +2262,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
                       <DTS:Variables />
                       <DTS:ObjectData>
                         <ExpressionTask
-                          Expression="@[User::Process10_log]= @[User::Process10_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::Model10]+&quot;&lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;" />
+                          Expression="@[User::Process10_log]= &quot; Hi Team,&lt;br&gt; &lt;br&gt;The Package &quot; + @[System::PackageName]  + &quot; has completed in &quot; + @[$Project::Environment] + &quot;&lt;br&gt;&#xA;&lt;html&gt;&lt;head&gt;&lt;style&gt; table, th, td { border: 1px solid black;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;br&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Model Name&lt;/th&gt;&lt;th&gt;Start Date&lt;/th&gt;&lt;th&gt;End Date&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;th&gt;Reason &lt;/th&gt;&lt;/tr&gt;&quot;+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::Model10]+&quot;&lt;/td&gt;&lt;td&gt;&quot;+ @[User::StartDate10] +&quot;&lt;/td&gt;&lt;td&gt;&quot;+ @[User::EndDate10] +&quot;&lt;/td&gt;&lt;td&gt; Failed &lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;&#xA;+&quot;&lt;/table&gt;&lt;br&gt;&lt;br&gt;Thank you&lt;/body&gt;&lt;/html&gt;&quot;" />
                       </DTS:ObjectData>
                     </DTS:Executable>
                   </DTS:Executables>
@@ -2302,19 +2302,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
                           SQLTask:SqlStatementSource="insert into [log].[tabular_model_processing_history] (start_time,end_time,model,outcome)&#xA;   VALUES (?,?,?,'Failed');&#xA;exec [sp].[mail] ?,?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                           <SQLTask:ParameterBinding
                             SQLTask:ParameterName="0"
-                            SQLTask:DtsVariableName="User::StartDate7"
+                            SQLTask:DtsVariableName="User::StartDate10"
                             SQLTask:ParameterDirection="Input"
                             SQLTask:DataType="129"
                             SQLTask:ParameterSize="-1" />
                           <SQLTask:ParameterBinding
                             SQLTask:ParameterName="1"
-                            SQLTask:DtsVariableName="User::EndDate7"
+                            SQLTask:DtsVariableName="User::EndDate10"
                             SQLTask:ParameterDirection="Input"
                             SQLTask:DataType="129"
                             SQLTask:ParameterSize="-1" />
                           <SQLTask:ParameterBinding
                             SQLTask:ParameterName="2"
-                            SQLTask:DtsVariableName="User::Model7"
+                            SQLTask:DtsVariableName="User::Model10"
                             SQLTask:ParameterDirection="Input"
                             SQLTask:DataType="129"
                             SQLTask:ParameterSize="-1" />
@@ -2338,7 +2338,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
                             SQLTask:ParameterSize="-1" />
                           <SQLTask:ParameterBinding
                             SQLTask:ParameterName="6"
-                            SQLTask:DtsVariableName="User::Process1_log"
+                            SQLTask:DtsVariableName="User::Process10_log"
                             SQLTask:ParameterDirection="Input"
                             SQLTask:DataType="129"
                             SQLTask:ParameterSize="-1" />
@@ -2362,7 +2362,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExecuteSQLTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Execute SQL Task"
-              DTS:ThreadHint="0">
+              DTS:ThreadHint="2">
               <DTS:Variables />
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
@@ -2421,7 +2421,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update End time"
-              DTS:ThreadHint="0">
+              DTS:ThreadHint="2">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -2436,7 +2436,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update Log"
-              DTS:ThreadHint="0">
+              DTS:ThreadHint="2">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -2451,7 +2451,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update Start time"
-              DTS:ThreadHint="0">
+              DTS:ThreadHint="2">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -2907,7 +2907,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.DTSProcessingTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Analysis Services Processing Task"
-              DTS:ThreadHint="2">
+              DTS:ThreadHint="1">
               <DTS:Variables />
               <DTS:PropertyExpression
                 DTS:Name="ConnectionName">"Model_Process_Connection"</DTS:PropertyExpression>
@@ -3045,7 +3045,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExecuteSQLTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Execute SQL Task"
-              DTS:ThreadHint="2">
+              DTS:ThreadHint="1">
               <DTS:Variables />
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
@@ -3104,7 +3104,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update End time"
-              DTS:ThreadHint="2">
+              DTS:ThreadHint="1">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -3119,7 +3119,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update Log"
-              DTS:ThreadHint="2">
+              DTS:ThreadHint="1">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -3134,7 +3134,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update Start time"
-              DTS:ThreadHint="2">
+              DTS:ThreadHint="1">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -4143,7 +4143,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.DTSProcessingTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Analysis Services Processing Task"
-              DTS:ThreadHint="9">
+              DTS:ThreadHint="8">
               <DTS:Variables />
               <DTS:PropertyExpression
                 DTS:Name="ConnectionName">"Model_Process_Connection"</DTS:PropertyExpression>
@@ -4181,7 +4181,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
                       <DTS:Variables />
                       <DTS:ObjectData>
                         <ExpressionTask
-                          Expression="@[User::Process7_log]= @[User::Process7_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::Model7]+&quot;&lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;" />
+                          Expression="@[User::Process7_log]= &quot; Hi Team,&lt;br&gt; &lt;br&gt;The Package &quot; + @[System::PackageName]  + &quot; has completed in &quot; + @[$Project::Environment] + &quot;&lt;br&gt;&#xA;&lt;html&gt;&lt;head&gt;&lt;style&gt; table, th, td { border: 1px solid black;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;br&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Model Name&lt;/th&gt;&lt;th&gt;Start Date&lt;/th&gt;&lt;th&gt;End Date&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;th&gt;Reason &lt;/th&gt;&lt;/tr&gt;&quot;+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::Model7]+&quot;&lt;/td&gt;&lt;td&gt;&quot;+ @[User::StartDate7] +&quot;&lt;/td&gt;&lt;td&gt;&quot;+ @[User::EndDate7] +&quot;&lt;/td&gt;&lt;td&gt; Failed &lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;&#xA;+&quot;&lt;/table&gt;&lt;br&gt;&lt;br&gt;Thank you&lt;/body&gt;&lt;/html&gt;&quot;" />
                       </DTS:ObjectData>
                     </DTS:Executable>
                   </DTS:Executables>
@@ -4281,7 +4281,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExecuteSQLTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Execute SQL Task"
-              DTS:ThreadHint="9">
+              DTS:ThreadHint="8">
               <DTS:Variables />
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
@@ -4340,7 +4340,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update End time"
-              DTS:ThreadHint="9">
+              DTS:ThreadHint="8">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -4355,7 +4355,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update Log"
-              DTS:ThreadHint="9">
+              DTS:ThreadHint="8">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -4370,7 +4370,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update Start time"
-              DTS:ThreadHint="9">
+              DTS:ThreadHint="8">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -4450,7 +4450,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.DTSProcessingTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Analysis Services Processing Task"
-              DTS:ThreadHint="10">
+              DTS:ThreadHint="9">
               <DTS:Variables />
               <DTS:PropertyExpression
                 DTS:Name="ConnectionName">"Model_Process_Connection"</DTS:PropertyExpression>
@@ -4488,7 +4488,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
                       <DTS:Variables />
                       <DTS:ObjectData>
                         <ExpressionTask
-                          Expression="@[User::Process8_log]= @[User::Process8_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::Model8]+&quot;&lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;" />
+                          Expression="@[User::Process8_log]=&quot; Hi Team,&lt;br&gt; &lt;br&gt;The Package &quot; + @[System::PackageName]  + &quot; has completed in &quot; + @[$Project::Environment] + &quot;&lt;br&gt;&#xA;&lt;html&gt;&lt;head&gt;&lt;style&gt; table, th, td { border: 1px solid black;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;br&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Model Name&lt;/th&gt;&lt;th&gt;Start Date&lt;/th&gt;&lt;th&gt;End Date&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;th&gt;Reason &lt;/th&gt;&lt;/tr&gt;&quot;+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::Model8]+&quot;&lt;/td&gt;&lt;td&gt;&quot;+ @[User::StartDate8] +&quot;&lt;/td&gt;&lt;td&gt;&quot;+ @[User::EndDate8] +&quot;&lt;/td&gt;&lt;td&gt; Failed &lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;&#xA;+&quot;&lt;/table&gt;&lt;br&gt;&lt;br&gt;Thank you&lt;/body&gt;&lt;/html&gt;&quot;" />
                       </DTS:ObjectData>
                     </DTS:Executable>
                   </DTS:Executables>
@@ -4588,7 +4588,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExecuteSQLTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Execute SQL Task"
-              DTS:ThreadHint="10">
+              DTS:ThreadHint="9">
               <DTS:Variables />
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
@@ -4647,7 +4647,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update End time"
-              DTS:ThreadHint="10">
+              DTS:ThreadHint="9">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -4662,7 +4662,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update Log"
-              DTS:ThreadHint="10">
+              DTS:ThreadHint="9">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -4677,7 +4677,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update Start time"
-              DTS:ThreadHint="10">
+              DTS:ThreadHint="9">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -4757,7 +4757,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.DTSProcessingTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Analysis Services Processing Task"
-              DTS:ThreadHint="8">
+              DTS:ThreadHint="10">
               <DTS:Variables />
               <DTS:PropertyExpression
                 DTS:Name="ConnectionName">"Model_Process_Connection"</DTS:PropertyExpression>
@@ -4795,7 +4795,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
                       <DTS:Variables />
                       <DTS:ObjectData>
                         <ExpressionTask
-                          Expression="@[User::Process9_log]= @[User::Process9_log]+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::Model9]+&quot;&lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;" />
+                          Expression="@[User::Process9_log]=&quot; Hi Team,&lt;br&gt; &lt;br&gt;The Package &quot; + @[System::PackageName]  + &quot; has completed in &quot; + @[$Project::Environment] + &quot;&lt;br&gt;&#xA;&lt;html&gt;&lt;head&gt;&lt;style&gt; table, th, td { border: 1px solid black;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;br&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Model Name&lt;/th&gt;&lt;th&gt;Start Date&lt;/th&gt;&lt;th&gt;End Date&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;th&gt;Reason &lt;/th&gt;&lt;/tr&gt;&quot;+&quot;&lt;tr&gt;&lt;td&gt; &quot;+@[User::Model9]+&quot;&lt;/td&gt;&lt;td&gt;&quot;+ @[User::StartDate9] +&quot;&lt;/td&gt;&lt;td&gt;&quot;+ @[User::EndDate9] +&quot;&lt;/td&gt;&lt;td&gt; Failed &lt;/td&gt;&lt;td&gt; Error Code : &quot;+ (DT_WSTR, 50)@[System::ErrorCode] +&quot; &lt;br&gt; Error Discription : &quot;+@[System::ErrorDescription]+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;&#xA;+&quot;&lt;/table&gt;&lt;br&gt;&lt;br&gt;Thank you&lt;/body&gt;&lt;/html&gt;&quot;" />
                       </DTS:ObjectData>
                     </DTS:Executable>
                   </DTS:Executables>
@@ -4835,19 +4835,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
                           SQLTask:SqlStatementSource="insert into [log].[tabular_model_processing_history] (start_time,end_time,model,outcome)&#xA;   VALUES (?,?,?,'Failed');&#xA;exec [sp].[mail] ?,?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                           <SQLTask:ParameterBinding
                             SQLTask:ParameterName="0"
-                            SQLTask:DtsVariableName="User::StartDate8"
+                            SQLTask:DtsVariableName="User::StartDate9"
                             SQLTask:ParameterDirection="Input"
                             SQLTask:DataType="129"
                             SQLTask:ParameterSize="-1" />
                           <SQLTask:ParameterBinding
                             SQLTask:ParameterName="1"
-                            SQLTask:DtsVariableName="User::EndDate8"
+                            SQLTask:DtsVariableName="User::EndDate9"
                             SQLTask:ParameterDirection="Input"
                             SQLTask:DataType="129"
                             SQLTask:ParameterSize="-1" />
                           <SQLTask:ParameterBinding
                             SQLTask:ParameterName="2"
-                            SQLTask:DtsVariableName="User::Model8"
+                            SQLTask:DtsVariableName="User::Model9"
                             SQLTask:ParameterDirection="Input"
                             SQLTask:DataType="129"
                             SQLTask:ParameterSize="-1" />
@@ -4871,7 +4871,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
                             SQLTask:ParameterSize="-1" />
                           <SQLTask:ParameterBinding
                             SQLTask:ParameterName="6"
-                            SQLTask:DtsVariableName="User::Process8_log"
+                            SQLTask:DtsVariableName="User::Process9_log"
                             SQLTask:ParameterDirection="Input"
                             SQLTask:DataType="129"
                             SQLTask:ParameterSize="-1" />
@@ -4895,7 +4895,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExecuteSQLTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Execute SQL Task"
-              DTS:ThreadHint="8">
+              DTS:ThreadHint="10">
               <DTS:Variables />
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
@@ -4954,7 +4954,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update End time"
-              DTS:ThreadHint="8">
+              DTS:ThreadHint="10">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -4969,7 +4969,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update Log"
-              DTS:ThreadHint="8">
+              DTS:ThreadHint="10">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -4984,7 +4984,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               DTS:ExecutableType="Microsoft.ExpressionTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update Start time"
-              DTS:ThreadHint="8">
+              DTS:ThreadHint="10">
               <DTS:Variables />
               <DTS:ObjectData>
                 <ExpressionTask
@@ -5204,14 +5204,91 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               Language="CSharp"
               ReadOnlyVariables="System::ErrorCode,System::ErrorDescription,System::SourceName,System::PackageName,User::Process_log,User::Process1_log,User::Process10_log,User::Process2_log,User::Process3_log,User::Process4_log,User::Process5_log,User::Process6_log,User::Process7_log,User::Process8_log,User::Process9_log,$Package::emailFrom,$Package::emailTo,$Package::Environment,$Package::Model">
               <ProjectItem
-                Name="Properties\Settings.settings"
-                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+                Name="ST_3c1d5152370348c99ca45803c2a2b493.csproj"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AC543E42-8F23-40B9-A09B-761820FF6E09}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ST_a326ecbb311b456e91904fff922bd575</RootNamespace>
+    <AssemblyName>ST_3c1d5152370348c99ca45803c2a2b493</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ScriptMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="ScriptTask" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST150</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.resx"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -5332,34 +5409,35 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
   </resheader>
 </root>]]></ProjectItem>
               <ProjectItem
-                Name="Properties\Settings.Designer.cs"
-                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
 //
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_a326ecbb311b456e91904fff922bd575")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_a326ecbb311b456e91904fff922bd575")]
+[assembly: AssemblyCopyright("Copyright @  2023")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
 
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_a326ecbb311b456e91904fff922bd575.Properties.Settings.get_Default():ST_a326ecbb311b456e91904fff922bd575.Properties.Sett" +
-    "ings")]
-
-namespace ST_a326ecbb311b456e91904fff922bd575.Properties {
-    
-    
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
-        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        private static Settings defaultInstance = new Settings();
-        
-        public static Settings Default {
-            get {
-                return defaultInstance;
-            }
-        }
-    }
-}]]></ProjectItem>
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
               <ProjectItem
                 Name="ScriptMain.cs"
                 Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
@@ -5527,121 +5605,43 @@ namespace ST_a326ecbb311b456e91904fff922bd575
   </msb:ItemGroup>
 </c:Project>]]></ProjectItem>
               <ProjectItem
-                Name="ST_3c1d5152370348c99ca45803c2a2b493.csproj"
-                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{AC543E42-8F23-40B9-A09B-761820FF6E09}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ST_a326ecbb311b456e91904fff922bd575</RootNamespace>
-    <AssemblyName>ST_3c1d5152370348c99ca45803c2a2b493</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
-    <TargetFrameworkProfile></TargetFrameworkProfile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>.\bin\Debug\</OutputPath>
-    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DebugSymbols>false</DebugSymbols>
-    <Optimize>true</Optimize>
-    <OutputPath>.\bin\Release\</OutputPath>
-    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
-    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
-  </ItemGroup>
-  <ItemGroup>
-    <AppDesigner Include="Properties\" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="ScriptMain.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <!-- Include the build rules for a C# project.-->
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ProjectExtensions>
-    <VisualStudio>
-      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
-        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
-        <Host Name="ScriptTask" />
-        <ProjectClient>
-          <HostIdentifier>SSIS_ST150</HostIdentifier>
-        </ProjectClient>
-      </FlavorProperties>
-    </VisualStudio>
-  </ProjectExtensions>
-</Project>]]></ProjectItem>
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_a326ecbb311b456e91904fff922bd575.Properties.Settings.get_Default():ST_a326ecbb311b456e91904fff922bd575.Properties.Sett" +
+    "ings")]
+
+namespace ST_a326ecbb311b456e91904fff922bd575.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
               <ProjectItem
-                Name="Properties\AssemblyInfo.cs"
-                Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_a326ecbb311b456e91904fff922bd575")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_a326ecbb311b456e91904fff922bd575")]
-[assembly: AssemblyCopyright("Copyright @  2023")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.Designer.cs"
                 Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -5859,6 +5859,27 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
+    </DTS:EventHandler>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnTaskFailed]"
+      DTS:CreationName="OnTaskFailed"
+      DTS:DTSID="{31558565-A05C-4649-8F43-D1D273D0D525}"
+      DTS:EventID="7340144"
+      DTS:EventName="OnTaskFailed"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{5297FAD2-FD96-4E91-A15A-EDC700F772EA}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables />
     </DTS:EventHandler>
   </DTS:EventHandlers>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
@@ -7692,6 +7713,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
     </LayoutInfo>
   </DtsEventHandler>
   <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 10\Analysis Services Processing Task.EventHandlers[OnTaskFailed]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Sequence Container\Process 10\Analysis Services Processing Task.EventHandlers[OnTaskFailed]\Execute SQL Task"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
     design-time-name="Package\Sequence Container\Process 10\Analysis Services Processing Task.EventHandlers[OnError]">
     <LayoutInfo>
       <GraphLayout
@@ -7754,6 +7787,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
     </LayoutInfo>
   </DtsEventHandler>
   <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 3\Analysis Services Processing Task.EventHandlers[OnTaskFailed]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Sequence Container\Process 3\Analysis Services Processing Task.EventHandlers[OnTaskFailed]\Execute SQL Task"
+          TopLeft="419,93" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
     design-time-name="Package\Sequence Container\Process 3\Analysis Services Processing Task.EventHandlers[OnError]">
     <LayoutInfo>
       <GraphLayout
@@ -7761,6 +7806,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
         <NodeLayout
           Size="155,42"
           Id="Package\Sequence Container\Process 3\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 4\Analysis Services Processing Task.EventHandlers[OnTaskFailed]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Sequence Container\Process 4\Analysis Services Processing Task.EventHandlers[OnTaskFailed]\Execute SQL Task"
           TopLeft="60,60" />
       </GraphLayout>
     </LayoutInfo>
@@ -7778,90 +7835,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
     </LayoutInfo>
   </DtsEventHandler>
   <DtsEventHandler
-    design-time-name="Package\Sequence Container\Process 5\Analysis Services Processing Task.EventHandlers[OnError]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="155,42"
-          Id="Package\Sequence Container\Process 5\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
-          TopLeft="60,60" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
-  <DtsEventHandler
-    design-time-name="Package\Sequence Container\Process 6\Analysis Services Processing Task.EventHandlers[OnError]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="155,42"
-          Id="Package\Sequence Container\Process 6\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
-          TopLeft="60,60" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
-  <DtsEventHandler
-    design-time-name="Package\Sequence Container\Process 7\Analysis Services Processing Task.EventHandlers[OnError]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="155,42"
-          Id="Package\Sequence Container\Process 7\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
-          TopLeft="60,60" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
-  <DtsEventHandler
-    design-time-name="Package\Sequence Container\Process 8\Analysis Services Processing Task.EventHandlers[OnError]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="155,42"
-          Id="Package\Sequence Container\Process 8\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
-          TopLeft="60,60" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
-  <DtsEventHandler
-    design-time-name="Package\Sequence Container\Process 9\Analysis Services Processing Task.EventHandlers[OnError]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="155,42"
-          Id="Package\Sequence Container\Process 9\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
-          TopLeft="60,60" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
-  <DtsEventHandler
-    design-time-name="Package\Sequence Container\Process 3\Analysis Services Processing Task.EventHandlers[OnTaskFailed]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="163,42"
-          Id="Package\Sequence Container\Process 3\Analysis Services Processing Task.EventHandlers[OnTaskFailed]\Execute SQL Task"
-          TopLeft="419,93" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
-  <DtsEventHandler
-    design-time-name="Package\Sequence Container\Process 4\Analysis Services Processing Task.EventHandlers[OnTaskFailed]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="163,42"
-          Id="Package\Sequence Container\Process 4\Analysis Services Processing Task.EventHandlers[OnTaskFailed]\Execute SQL Task"
-          TopLeft="60,60" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
-  <DtsEventHandler
     design-time-name="Package\Sequence Container\Process 5\Analysis Services Processing Task.EventHandlers[OnTaskFailed]">
     <LayoutInfo>
       <GraphLayout
@@ -7869,6 +7842,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
         <NodeLayout
           Size="163,42"
           Id="Package\Sequence Container\Process 5\Analysis Services Processing Task.EventHandlers[OnTaskFailed]\Execute SQL Task"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 5\Analysis Services Processing Task.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 5\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
           TopLeft="60,60" />
       </GraphLayout>
     </LayoutInfo>
@@ -7886,6 +7871,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
     </LayoutInfo>
   </DtsEventHandler>
   <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 6\Analysis Services Processing Task.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 6\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
     design-time-name="Package\Sequence Container\Process 7\Analysis Services Processing Task.EventHandlers[OnTaskFailed]">
     <LayoutInfo>
       <GraphLayout
@@ -7893,6 +7890,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
         <NodeLayout
           Size="163,42"
           Id="Package\Sequence Container\Process 7\Analysis Services Processing Task.EventHandlers[OnTaskFailed]\Execute SQL Task"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 7\Analysis Services Processing Task.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 7\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
           TopLeft="60,60" />
       </GraphLayout>
     </LayoutInfo>
@@ -7910,6 +7919,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
     </LayoutInfo>
   </DtsEventHandler>
   <DtsEventHandler
+    design-time-name="Package\Sequence Container\Process 8\Analysis Services Processing Task.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Sequence Container\Process 8\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
     design-time-name="Package\Sequence Container\Process 9\Analysis Services Processing Task.EventHandlers[OnTaskFailed]">
     <LayoutInfo>
       <GraphLayout
@@ -7922,13 +7943,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
     </LayoutInfo>
   </DtsEventHandler>
   <DtsEventHandler
-    design-time-name="Package\Sequence Container\Process 10\Analysis Services Processing Task.EventHandlers[OnTaskFailed]">
+    design-time-name="Package\Sequence Container\Process 9\Analysis Services Processing Task.EventHandlers[OnError]">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="163,42"
-          Id="Package\Sequence Container\Process 10\Analysis Services Processing Task.EventHandlers[OnTaskFailed]\Execute SQL Task"
+          Size="155,42"
+          Id="Package\Sequence Container\Process 9\Analysis Services Processing Task.EventHandlers[OnError]\Expression Task"
           TopLeft="60,60" />
       </GraphLayout>
     </LayoutInfo>
