@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="LateralFlowTests_insert"
   DTS:PackageType="5"
-  DTS:VersionBuild="17"
-  DTS:VersionGUID="{6756DF5E-4A12-4D2A-A6AA-E956779A7192}">
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{3F0A8BD0-E762-4FC1-A932-39D51372F688}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -135,7 +135,7 @@ delete from _nwis_acc.[_LateralFlowTests] where  SpecimenProcessedDate &gt;='@ma
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{855B9647-5FFA-4069-ADBD-897BD3F3173F}"
-          SQLTask:SqlStatementSource="select max(SpecimenProcessedDate) from [_nwis_acc].[_LateralFlowTests] with (nolock)  where SpecimenProcessedDate &lt;&gt; '22000101'"
+          SQLTask:SqlStatementSource="SELECT DATEADD(day,-30,SpecimenProcessedDate) FROM (select max(SpecimenProcessedDate) as SpecimenProcessedDate from [_nwis_acc].[_LateralFlowTests] with (nolock)  where SpecimenProcessedDate &lt;&gt; '22000101')t"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -8184,21 +8184,21 @@ delete from _nwis_acc.[_LateralFlowTests] where  SpecimenProcessedDate &gt;='@ma
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="164,42"
+          Id="Package\Delete from Table"
+          TopLeft="294,140" />
+        <NodeLayout
           Size="140,42"
           Id="Package\Get maxDate"
           TopLeft="302,63" />
-        <NodeLayout
-          Size="260,42"
-          Id="Package\SQL Load _nwis_acc_LateralFlowTests"
-          TopLeft="74,234" />
         <NodeLayout
           Size="270,42"
           Id="Package\OleDB Load _nwis_acc_LateralFlowTests"
           TopLeft="411,235" />
         <NodeLayout
-          Size="164,42"
-          Id="Package\Delete from Table"
-          TopLeft="294,140" />
+          Size="260,42"
+          Id="Package\SQL Load _nwis_acc_LateralFlowTests"
+          TopLeft="74,234" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="374,105">
@@ -8293,6 +8293,52 @@ delete from _nwis_acc.[_LateralFlowTests] where  SpecimenProcessedDate &gt;='@ma
     </LayoutInfo>
   </Package>
   <TaskHost
+    design-time-name="Package\OleDB Load _nwis_acc_LateralFlowTests">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\OleDB Load _nwis_acc_LateralFlowTests\OLE DB Source"
+          TopLeft="428,34" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\OleDB Load _nwis_acc_LateralFlowTests\OLE DB Destination"
+          TopLeft="417,124" />
+        <EdgeLayout
+          Id="Package\OleDB Load _nwis_acc_LateralFlowTests.Paths[OLE DB Source Output]"
+          TopLeft="502.75,76">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48"
+              Start="0,0"
+              End="0,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\OleDB Load _nwis_acc_LateralFlowTests\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
     design-time-name="Package\SQL Load _nwis_acc_LateralFlowTests">
     <LayoutInfo>
       <GraphLayout
@@ -8340,52 +8386,6 @@ delete from _nwis_acc.[_LateralFlowTests] where  SpecimenProcessedDate &gt;='@ma
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\SQL Load _nwis_acc_LateralFlowTests\SQL Server Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\OleDB Load _nwis_acc_LateralFlowTests">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="150,42"
-          Id="Package\OleDB Load _nwis_acc_LateralFlowTests\OLE DB Source"
-          TopLeft="428,34" />
-        <NodeLayout
-          Size="171,42"
-          Id="Package\OleDB Load _nwis_acc_LateralFlowTests\OLE DB Destination"
-          TopLeft="417,124" />
-        <EdgeLayout
-          Id="Package\OleDB Load _nwis_acc_LateralFlowTests.Paths[OLE DB Source Output]"
-          TopLeft="502.75,76">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,48"
-              Start="0,0"
-              End="0,40.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,40.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\OleDB Load _nwis_acc_LateralFlowTests\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
