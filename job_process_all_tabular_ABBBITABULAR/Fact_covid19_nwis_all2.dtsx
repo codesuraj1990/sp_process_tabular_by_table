@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Fact_covid19_nwis_all2"
   DTS:PackageType="5"
-  DTS:VersionBuild="47"
-  DTS:VersionGUID="{B9A0E51D-C5DC-4309-98FE-9A24E02A641D}">
+  DTS:VersionBuild="48"
+  DTS:VersionGUID="{B9D071D3-076D-4494-A57A-4D98482DE142}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -841,7 +841,7 @@ and noitisop = 1
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{489BAE0F-A921-4393-AE71-AC1F801BDD28}"
-          SQLTask:SqlStatementSource="SELECT  cast(CONVERT(VARCHAR(2), GETDATE(), 108) as int)"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE fact_live.covid19_nwis_all2_stg;&#xA;&#xA;SELECT  cast(CONVERT(VARCHAR(2), GETDATE(), 108) as int)"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
