@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="LateralFlowTests_insert"
   DTS:PackageType="5"
-  DTS:VersionBuild="18"
-  DTS:VersionGUID="{3F0A8BD0-E762-4FC1-A932-39D51372F688}">
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{48BD83F6-F28B-4A89-9721-E67173AE480A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -21,11 +21,13 @@
       DTS:CreationName="OLEDB"
       DTS:DTSID="{855B9647-5FFA-4069-ADBD-897BD3F3173F}"
       DTS:ObjectName="Destination">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::DestinationConnection]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=DESKTOP-K66S9IA;Initial Catalog=warehouse;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-LateralFlowTests_insert-{855B9647-5FFA-4069-ADBD-897BD3F3173F}DESKTOP-K66S9IA.warehouse1;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=DESKTOP-K66S9IA;Initial Catalog=warehouse;Provider=SQLOLEDB.1;Integrated Security=SSPI;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -33,14 +35,54 @@
       DTS:CreationName="OLEDB"
       DTS:DTSID="{EE85DA4A-32D9-4CCD-B83F-BF85B828FAFD}"
       DTS:ObjectName="Source">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::SourceConnection]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=DESKTOP-K66S9IA;Initial Catalog=warehouse;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-LateralFlowTests_insert-{EE85DA4A-32D9-4CCD-B83F-BF85B828FAFD}Data Connection;" />
+          DTS:ConnectionString="Data Source=DESKTOP-K66S9IA;Initial Catalog=warehouse;Provider=SQLOLEDB.1;Integrated Security=SSPI;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{9C2BD70A-262F-4951-A748-2B2AFA55A9FB}"
+      DTS:ObjectName="DestinationDB">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">warehouse</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{0496F153-C645-4A82-A36A-CDEB9F6FD2BE}"
+      DTS:ObjectName="DestinationServer">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">DESKTOP-K66S9IA</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{C4B2AF17-72CC-485E-9BE8-432B42FBBD18}"
+      DTS:ObjectName="SourceDB">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">warehouse</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{846813DB-2076-46C0-AA21-E5962534E476}"
+      DTS:ObjectName="SourceServer">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">DESKTOP-K66S9IA</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
@@ -66,6 +108,17 @@ delete from _nwis_acc.[_LateralFlowTests] where  SpecimenProcessedDate &gt;='@ma
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
+      DTS:DTSID="{1CFB291C-25FE-4731-A094-4BF3A9A81F8E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;Data Source=&quot;+ @[$Package::SourceServer] +&quot;;Initial Catalog=&quot;+ @[$Package::SourceDB] +&quot;;Provider=SQLOLEDB.1;Integrated Security=SSPI&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DestinationConnection">
+      <DTS:VariableValue
+        DTS:DataType="8">Data Source=DESKTOP-K66S9IA;Initial Catalog=warehouse;Provider=SQLOLEDB.1;Integrated Security=SSPI</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
       DTS:DTSID="{877AFA3E-969D-46E0-9C03-76D5B96E04FC}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
@@ -83,6 +136,17 @@ delete from _nwis_acc.[_LateralFlowTests] where  SpecimenProcessedDate &gt;='@ma
       DTS:ObjectName="Query">
       <DTS:VariableValue
         DTS:DataType="8">select s.[AdministrationMethod],s.[AddressLine1],s.[AddressLine2],s.[AppointmentDate],s.[CareHomeLocationID],s.[CareHomeRole],s.[City],s.[CommissioningOrganisation],s.[Country],s.[CountryCode],s.[CovidSymptomatic],s.[DateOfBirth],s.[Easting],s.[EmailAddress],s.[Ethnicity],s.[FirstName],s.[Gender],s.[KeyworkerID],s.[KeyWorkerMobile],s.[KeyWorkerName],s.[KeyWorkerOrganisation],s.[KeyWorkerType],s.[LLSOA2011],s.[Landline],s.[LastName],s.[LocalAuthority],s.[LowerTierLocalAuthority],s.[MobileNumber],s.[NHSNumber],s.[NHSRegion],s.[NormalisedPostcode],s.[Northing],s.[ParliamentaryConstituency],s.[PostCodeCountry],s.[Postcode],s.[ProcessingLabCode],s.[RecordCreatedDate],s.[STP],s.[SpecimenID],s.[SpecimenProcessedDate],s.[SubjectID],s.[TestCentreCountry],s.[TestCentreID],s.[TestEndDate],s.[TestID],s.[TestResult],s.[TestStartDate],s.[GPCode],s.[WorkStatus],s.[IndustrySector],s.[EmployerName],s.[Occupation],s.[OccupationTitle],s.[TestReason],s.[DateOfOnset],s.[OrganisationId],s.[OrganisationRole],s.[OrganisationType],s.[TestType],s.[TestLocation],s.[NonDigitalUser],s.[ResultInfo],s.[SampleCreationDate],s.[ProcessTime],s.[Ch1Target],s.[Ch1Result],s.[Ch1Cq],s.[Ch2Target],s.[Ch2Result],s.[Ch2Cq],s.[Ch3Target],s.[Ch3Result],s.[Ch3Cq],s.[Ch4Target],s.[Ch4Result],s.[Ch4Cq],s.[Person_ID],s.[DateOfBirthScorePercentage],s.[FamilyNameScorePercentage],s.[GenderScorePercentage],s.[GivenNameScorePercentage],s.[MatchedAlgorithmIndicator],s.[MatchedConfidencePercentage],s.[PostcodeScorePercentage],s.[MPSMobileNumber],s.[MPSEmailAddress],s.[CohortPool],s.[WorkOrStudyStatus],s.[StudyGrade],s.[InstitutionName],s.[InstitutionTown],s.[TestKit],s.[ID],s.[dw_exID],s.[OrganisationCountry],s.[HouseholdRole],s.[CreateSource],s.[VaccinationStatus],s.[VaccinationPeriod],s.[VaccinationDate],s.[InstitutionPostcode],s.[HasRecentlyTravelled],s.[RecentTravelDestination],s.[NHSNoStatus],s.[NHSNumberMatchProbability] from _nwis_acc.[_LateralFlowTests] s where SpecimenProcessedDate&gt;='22000101' and SpecimenProcessedDate &lt;&gt; '22000101'</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9C6FF2F0-200F-49C1-9F57-EDCE244BA21C}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;Data Source=&quot;+ @[$Package::DestinationServer] +&quot;;Initial Catalog=&quot;+ @[$Package::DestinationDB] +&quot;;Provider=SQLOLEDB.1;Integrated Security=SSPI&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceConnection">
+      <DTS:VariableValue
+        DTS:DataType="8">Data Source=DESKTOP-K66S9IA;Initial Catalog=warehouse;Provider=SQLOLEDB.1;Integrated Security=SSPI</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
