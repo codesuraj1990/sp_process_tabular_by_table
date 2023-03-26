@@ -12,8 +12,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="TTPCasesView_insert"
   DTS:PackageType="5"
-  DTS:VersionBuild="42"
-  DTS:VersionGUID="{73C4D776-3795-4518-BA1F-668A587DE997}">
+  DTS:VersionBuild="43"
+  DTS:VersionGUID="{0F834DAC-2B5D-4A4D-B079-38A0EC2DC87E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
