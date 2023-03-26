@@ -12,8 +12,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="TTPCasesView_insert"
   DTS:PackageType="5"
-  DTS:VersionBuild="39"
-  DTS:VersionGUID="{C2CE4E50-20A2-49E4-AE43-BCB183C53D8B}">
+  DTS:VersionBuild="40"
+  DTS:VersionGUID="{1ED3DE22-698E-4784-99D9-DD86233DA3ED}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -6872,6 +6872,8 @@
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
       DTS:DTSID="{4E020F25-A4CF-4BFA-8774-E34E84956227}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::Count]==0"
       DTS:From="Package\Get Count"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
@@ -6954,7 +6956,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="51.4166666666667,17.6332288401254,16,16"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
