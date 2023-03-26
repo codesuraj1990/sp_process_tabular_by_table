@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Fact_covid19_nwis_all2"
   DTS:PackageType="5"
-  DTS:VersionBuild="35"
-  DTS:VersionGUID="{23B7AC51-ADB3-498F-AE6A-B52796761141}">
+  DTS:VersionBuild="36"
+  DTS:VersionGUID="{D68B9658-AFB8-4E48-AEEE-C4BEBF9FBFEC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -84,6 +84,209 @@
     </DTS:PackageParameter>
   </DTS:PackageParameters>
   <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{00081C18-E0C6-4BB2-B217-F79205D99EBA}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;select &#x9;&#xA;&#x9;case &#xA;&#x9;&#x9;when EPVIS_UserSite_DR like '7A6%' then 1&#xA;&#x9;&#x9;when EPVIS_HospitalCode_DR like '7A6%' then 1&#xA;&#x9;&#x9;when EPVIS_RowId in (select episode_id from temp.covid19_occ_health_override) then 1&#xA;&#x9;&#x9;else 0&#xA;&#x9;end as ab_counter,&#xA;&#x9;case &#xA;&#x9;&#x9;when EPVIS_UserSite_DR like '7A6%' and case_origin &lt;&gt; 'Occupational Health' then 1&#xA;&#x9;&#x9;when EPVIS_HospitalCode_DR like '7A6%' and case_origin &lt;&gt; 'Occupational Health' then 1&#xA;&#x9;&#x9;else 0&#xA;&#x9;end as patient_counter,&#xA;--&#x9;case when case_origin = 'Occupational Health' and partner_organisation = 'NHS Aneurin Bevan' then 1 else 0 end as oh_counter,&#xA;&#x9;case &#xA;&#x9;&#x9;when staff_flag = 'Yes' then 1 &#xA;&#x9;&#x9;when EPVIS_RowId in (select episode_id from temp.covid19_occ_health_override) then 1&#xA;&#x9;&#x9;else 0 end &#xA;&#x9;as oh_counter,&#xA;&#x9;case &#xA;&#x9;&#x9;when (EPVIS_HospitalCode_DR like '7A6%' or EPVIS_UserSite_DR like '7A6%') and case_origin = 'Occupational Health' and staff_flag = 'No' then 1&#xA;&#x9;&#x9;else 0 &#xA;&#x9;end as po_counter,&#xA;&#x9;case when care_home_flag = 'Yes' then 1 else 0 end as care_home_counter,&#xA;&#x9;case when LocalHealthBoardResidenceCode = '7A6' then 1 else 0 end as res_counter,&#xA;&#x9;case &#xA;&#x9;&#x9;when CTUPersonTypeConsolidated = 'HCW' and EPVIS_DoctorCode_DR = 'COVID1936' then 1&#xA;&#x9;&#x9;else 0&#xA;&#x9;end as staff_counter,&#xA;&#x9;*, &#xA;&#x9;row_number() over(partition by coalesce(caseno, nhs, EPVIS_RowId), result order by EPVIS_DateTimeOfCollection) as result_position&#xA;FROM (&#xA;select&#xA;&#x9;f.*,&#xA;&#x9;(CONVERT(int,CONVERT(char(8),getdate(),112))-CONVERT(char(8),coalesce(dp.birthdate,SubjectDOB),112))/10000 as age,&#xA;    dd.id as date_id,&#xA;&#x9;dt.id as time_id,&#xA;&#x9;dp.id as patient_id,&#xA;    coalesce(pcr.id,pc.id) as postcode_id, --changed to using result postcode as default&#xA;    dch.id as care_home_id,&#xA;    coalesce(pcr.lsoa11,pc.lsoa11) as lsoa11,&#xA;    dgp.id as gp_practice_id,&#xA;    coalesce(dsex.id,dsexr.id) as sex_id,&#xA;--&#x9;occ.location_id,&#xA;--&#x9;occ.specialty_id,&#xA;--&#x9;occ.clinician_id,&#xA;&#x9;dl.id as location_id,&#xA;&#x9;ds.id as specialty_id,&#xA;&#x9;dc.id as clinician_id,&#xA;&#x9;de.id as ethnicity_id,&#xA;&#x9;dlqc.id as lims_qualifier_category_id,&#xA;&#x9;dld.id as lims_doctor_id,&#xA;&#x9;dll.id as lims_location_id,&#xA;&#x9;--case when epvis_patienttype in ('IP','ITU','AE') /*PP,OP,DC,OTH,OH,IP,DIAL,COM,ITU,AE,GP*/ then 'Yes' else 'No' end as tested_in_hospital2,&#xA;&#x9;--coalesce((select top 1 1 from _cws.movements cws where f.caseno = cws.crn and f.EPVIS_DateTimeOfCollection between cws.movement_start and coalesce(cws.movement_end,getdate())),0) as tested_in_hospital,&#xA;--&#x9;case when cws.crn is not null then 1 else 0 end as tested_in_hospital,&#xA;&#x9;case&#x9;when cws.crn is not null then 1&#xA;&#x9;&#x9;&#x9;when abpsdnhs.abuhb_provider_stay_id is not null then 1 &#xA;&#x9;&#x9;&#x9;when abpsdcaseno.abuhb_provider_stay_id is not null then 1 &#xA;&#x9;&#x9;&#x9;else 0 &#xA;&#x9;end as tested_in_hospital,&#xA;&#x9;&#x9;datediff(d,cws1st.movement_start,f.EPVIS_DateOfCollection) as tested_in_hospital_delay,&#xA;--&#x9;datediff(d,psd.provider_start_date,f.EPVIS_DateOfCollection) as tested_in_provider_delay,&#xA;&#x9;datediff(d,coalesce(abpsdnhs.provider_start_date,abpsdcaseno.provider_start_date),f.EPVIS_DateOfCollection) as tested_in_provider_delay,&#xA;&#x9;case &#xA;&#x9;&#x9;when dll.lims_location_type is not null then dll.lims_location_type&#xA;&#x9;&#x9;when EPVIS_RowId in (select episode_id from temp.covid19_occ_health_override) then 'Occupational Health'&#xA;&#x9;&#x9;else f.PatientTypeDescription&#xA;&#x9;end as case_origin,&#xA;&#x9;case &#xA;&#x9;&#x9;when EPVIS_DoctorCode_DR like 'COV[I!]D19%' and EPVIS_DoctorCode_DR not in ('COVID19','COVID1936') then trim(replace(replace(Doctor,'Community Testing Unit','CTU'),'CTU',''))&#xA;&#x9;&#x9;when EPVIS_DoctorCode_DR like 'COV%' and EPVIS_DoctorCode_DR not in ('COVID19','COVID1936') then Doctor&#xA;&#x9;&#x9;when epvis_hospitalcode_dr in ('7A6AR6CTU01','7A6AR6CTU02','7A6ATOH', '7A6AR6CTU13') and dlqc.reporting_category in ('Care Home Resident','Care Home Worker')  then qualifiercategory&#xA;&#x9;&#x9;when epvis_hospitalcode_dr = 'RYTU6NHSDCH' and f.LocalHealthBoardResidenceCode = '7A6' then Doctor&#xA;&#x9;&#x9;when epvis_hospitalcode_dr in ('7A6AR6CTU01','7A6AR6CTU02','7A6ATOH', '7A6AR6CTU13') then 'NHS Aneurin Bevan'&#xA;&#x9;&#x9;when epvis_hospitalcode_dr like '7A6%' and EPVIS_PatientType = 'OH' then 'NHS Aneurin Bevan'&#xA;&#x9;&#x9;when EPVIS_RowId in (select episode_id from temp.covid19_occ_health_override) then 'NHS Aneurin Bevan'&#xA;&#x9;end as partner_organisation,&#xA;&#x9;case&#xA;&#x9;&#x9;when dll.lims_location_type = 'Occupational Health' and coalesce(dld.institution,'') = '' and coalesce(dlqc.reporting_category,'') = '' then 'Yes'&#xA;&#x9;&#x9;else 'No'&#xA;&#x9;end as staff_flag,&#xA;&#x9;case &#xA;&#x9;&#x9;when dcfp.covid_false_positive = 'Yes' then 'Negative'&#xA;&#x9;&#x9;when VISTD_TestData in ('D6','D7','LL7') then 'Positive'&#xA;&#x9;&#x9;when VISTD_TestData in ('ND','ND7') then 'Negative'&#xA;&#x9;&#x9;else 'In Progress'&#xA;&#x9;end as result,&#xA;&#x9;case &#xA;&#x9;&#x9;when dll.lims_location_type = 'Care Home' and f.LocalHealthBoardResidenceCode = '7A6' then 'Yes'&#xA;&#x9;&#x9;when dlqc.reporting_category in ('Care Home Resident','Care Home Worker') and f.LocalHealthBoardResidenceCode = '7A6' then 'Yes'&#xA;&#x9;&#x9;when dld.institution = 'Care Home' then 'Yes'&#xA;&#x9;&#x9;else 'No'&#xA;&#x9;end as care_home_flag,&#xA;&#x9;row_number() over(partition by EPVIS_RowId order by cws.origin desc, cws.episode_seq desc) as noitisop&#xA;&#x9;FROM&#xA;&#x9;(&#xA;select &#xA;&#x9;episode as EPVIS_RowId,&#xA;&#x9;coalesce(dpcrn.caseno,dpnhs.caseno) as caseno,&#xA;&#x9;NHSNO as nhs,&#xA;&#x9;SubjectSurname,&#xA;&#x9;SubjectFirstForename as SubjectGivenName,&#xA;&#x9;SubjectGenderCode,&#xA;&#x9;SubjectDOB,&#xA;&#x9;NHSNo as SubjectNHS,&#xA;&#x9;SubjectPostcode,&#xA;&#x9;LocalHealthBoardResidenceCode,&#xA;&#x9;CRNAssigningAuthority+', ' + CRN as SubjectLocalId,&#xA;&#x9;TestingLabCode as EPVIS_UserSite_DR,&#xA;&#x9;OutbreakCode as EPVIS_OutbreakCode_DR,&#xA;&#x9;PatientTypeCode as EPVIS_PatientType,&#xA;&#x9;PatientTypeDescription,&#xA;&#x9;DoctorCode as EPVIS_DoctorCode_DR,&#xA;&#x9;Doctor,&#xA;&#x9;LocationCode as EPVIS_HospitalCode_DR,&#xA;&#x9;ClinicalHistory,&#xA;&#x9;CTUPersonType,&#xA;&#x9;CTUPersonTypeConsolidated,&#xA;&#x9;SpecimenCollectedDate as EPVIS_DateOfCollection,&#xA;&#x9;SpecimenCollectedTime as EPVIS_TimeOfCollection,&#xA;&#x9;SpecimenCollectedDateTime as EPVIS_DateTimeOfCollection,&#xA;&#x9;SpecimenReceivedDate,&#xA;&#x9;SpecimenReceivedTime,&#xA;&#x9;SpecimenReceivedDateTime,&#xA;&#x9;EpisodeSetKey as VISTS_RowId,&#xA;&#x9;AuthorisedDate as VISTS_DateOfAuthorisation,&#xA;&#x9;AuthorisedTime as VISTS_TimeOfAuthorisation,&#xA;&#x9;AuthorisedDateTime as VISTS_DateTimeOfAuthorisation,&#xA;&#x9;EpisodeSetKey + '||' + TestCode as VISTD_RowId,&#xA;&#x9;TestCode as VISTD_TestCode_DR,&#xA;&#x9;ResultCode as VISTD_TestData, &#xA;&#x9;row_number() over(partition by episode order by case when resultcode like 'D%' then 1 when resultcode like 'L%' then 2 when resultcode like 'N%' then 3 else 4 end) as position,&#xA;&#x9;case when ClinicalHistoryPhone ='See Clinical History' then [Contact details] else coalesce(ClinicalHistoryPhone,[Contact details]) end as Phone,&#xA;&#x9;--[Contact details]&#xA;&#x9;Location + ' (' + LocationCode + ')' as RequestLocation,&#xA;&#x9;--Hospital,&#xA;&#x9;ClinicalHistory as ClinicalDetails,&#xA;&#x9;CTUPersonType as QualifierCategory,&#xA;&#x9;Outbreak,&#xA;&#x9;--SpecimenType, ...eg. Throat Swab&#xA;&#x9;SpecimenReceivedDate as DateReceived,&#xA;&#x9;TestingLabName as TestLab,&#xA;&#x9;TestSetName + ' (' + TestSetLIMSCode + ')' as TestSet,&#xA;&#x9;ResultName as CoronavirusPCRResult,&#xA;&#x9;ResultComment as ResultComments,&#xA;&#x9;ReportComments,&#xA;&#x9;AutoComments,&#xA;&#x9;Method as TestMethod,&#xA;&#x9;_updated&#xA;---from [_nwis].[_COVID_LIMSTestResults2]&#xA;from _nwis.CovidTestResults_latest&#xA;left join dim.patient dpcrn on CRN = dpcrn.system_key and dpcrn.system = 'myrddin' and dpcrn.end_date = '29991231' and CRNAssigningAuthority = 'ABH Myrddin'&#xA;left join dim.patient dpnhs on NHSNo = dpnhs.nhs and dpnhs.system = 'myrddin' and dpnhs.end_date = '29991231' and dpnhs.caseno = dpnhs.system_key&#xA;--where (LocationCode like '7A6%' or TestingLabCode like '7A6%')&#xA;--and PossibleDuplicateOrSurplusRecord = 0&#xA;where isnull(SubjectFirstForename,'') not in ('TEST','TESTA','TESTER')&#xA;and _updated &gt;='20220401'&#xA;)f&#xA;--left join _lims._CT_Doctor CTDR on EPVIS_DoctorCode_DR = CTDR_RowId&#xA;left join dim.date dd with (nolock) on f.EPVIS_DateOfCollection = dd.date&#xA;left join dim.time dt with (nolock) on f.EPVIS_TimeOfCollection = dt.system_key and dt.system = 'derived' and f.EPVIS_DateOfCollection between dt.start_date and dt.end_date&#xA;left join dim.patient dp with (nolock) on f.caseno = dp.system_key and dp.system = 'myrddin' and f.EPVIS_DateOfCollection between dp.start_date and dp.end_date &#xA;&#x9;left join dim.care_home dch with (nolock) on dp.care_home = dch.system_key and dch.system = 'cssiw' and f.EPVIS_DateOfCollection between dch.start_date and dch.end_date&#xA;&#x9;left join dim_table.postcode pc with (nolock) on dp.postcode = pc.system_key and pc.system = 'postcode' and f.EPVIS_DateOfCollection between pc.start_date and pc.end_date &#x9;&#xA;&#x9;left join dim_table.postcode pcr with (nolock) on f.SubjectPostcode = pcr.system_key and pcr.system = 'postcode' and f.EPVIS_DateOfCollection between pcr.start_date and pcr.end_date&#xA;&#x9;left join dim.sex dsex with (nolock) on dp.sex = dsex.system_key and dsex.system = 'demographic' and f.EPVIS_DateOfCollection between dsex.start_date and dsex.end_date &#xA;&#x9;left join dim.sex dsexr with (nolock) on f.SubjectGenderCode = dsexr.system_key and dsexr.system = 'demographic' and f.EPVIS_DateOfCollection between dsexr.start_date and dsexr.end_date&#xA;&#x9;left join dim.gp_practice dgp with (nolock) on dp.gp_practice = dgp.system_key and dgp.system = 'national' and f.EPVIS_DateOfCollection between dgp.start_date and dgp.end_date&#xA;&#x9;left join dim.ethnicity de with (nolock) on dp.ethnic_origin = de.system_key and de.system = 'myrddin' and f.EPVIS_DateOfCollection between de.start_date and de.end_date&#xA;left join _cws.movements cws on f.caseno = cws.crn and f.EPVIS_DateTimeOfCollection &gt;= cws.movement_start and f.EPVIS_DateTimeOfCollection &lt; coalesce(cws.movement_end,getdate()) --and cws.ward not like '%*[0-9]_' and cws.ward not like '%*ND'&#xA;&#x9;left join dim.location dl with (nolock) on cws.ward = dl.system_key and dl.system = 'cws' and f.EPVIS_DateOfCollection between dl.start_date and dl.end_date&#xA;&#x9;left join dim.specialty ds with (nolock) on cws.specialty = ds.system_key and ds.system = 'cws' and f.EPVIS_DateOfCollection between ds.start_date and ds.end_date&#xA;&#x9;left join dim.clinician dc with (nolock) on cws.consultant = dc.system_key and dc.system = 'myrddin' and f.EPVIS_DateOfCollection between dc.start_date and dc.end_date&#xA;&#x9;left join _cws.movements cws1st on cws.episode_seq = cws1st.episode_seq and cws.origin = cws1st.origin and cws1st.movement_number = 1&#xA;&#xA;left join dim.lims_qualifier_category dlqc with (nolock)  on dlqc.system_key = f.QualifierCategory and dlqc.system = 'lims' and f.EPVIS_DateOfCollection between dlqc.start_date and dlqc.end_date&#xA;left join dim.lims_doctor dld with (nolock)  on dld.system_key = f.EPVIS_DoctorCode_DR and dld.system = 'lims' and f.EPVIS_DateOfCollection between dld.start_date and dld.end_date&#xA;left join dim.lims_location dll with (nolock)  on dll.system_key = f.epvis_hospitalcode_dr and dll.system = 'lims' and f.EPVIS_DateOfCollection between dll.start_date and dll.end_date&#xA;&#xA;left join _wpas.provider_stay_derived psd with (nolock)  on f.caseno = psd.caseno and f.EPVIS_DateTimeOfCollection &gt;= psd.provider_start_date and coalesce(f.EPVIS_DateTimeOfCollection,getdate()) &lt; psd.provider_end_date&#xA;&#xA;left join _abuhb.provider_stay_derived abpsdnhs with (nolock) on f.nhs = abpsdnhs.nhs and f.EPVIS_DateTimeOfCollection &gt;= abpsdnhs.provider_start_date and coalesce(f.EPVIS_DateTimeOfCollection,getdate()) &lt; abpsdnhs.provider_end_date&#xA;left join _abuhb.provider_stay_derived abpsdcaseno with (nolock) on f.caseno = abpsdcaseno.caseno and f.EPVIS_DateTimeOfCollection &gt;= abpsdcaseno.provider_start_date and coalesce(f.EPVIS_DateTimeOfCollection,getdate()) &lt; abpsdcaseno.provider_end_date&#xA;&#xA;left join dim.covid_false_positive dcfp on f.VISTS_RowId = dcfp.system_key and dcfp.system = 'lims' and dcfp.end_date = '29991231' and dcfp.covid_false_positive = 'Yes'&#xA;&#xA;&#xA;where f.position = 1&#xA;)T where EPVIS_RowId not in ('7004680277','7004661106','1409551424','1409551877') --Test Patients&#xA;and coalesce(subjectsurname,'') not in ('QCMD 2020','TEST')&#xA;--and (partner_organisation = 'NHS Aneurin Bevan' or case_origin &lt;&gt; 'Occupational Health')&#xA;and noitisop = 1;&#xA;&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dailySQL">
+      <DTS:VariableValue
+        DTS:DataType="8">select 	
+	case 
+		when EPVIS_UserSite_DR like '7A6%' then 1
+		when EPVIS_HospitalCode_DR like '7A6%' then 1
+		when EPVIS_RowId in (select episode_id from temp.covid19_occ_health_override) then 1
+		else 0
+	end as ab_counter,
+	case 
+		when EPVIS_UserSite_DR like '7A6%' and case_origin &lt;&gt; 'Occupational Health' then 1
+		when EPVIS_HospitalCode_DR like '7A6%' and case_origin &lt;&gt; 'Occupational Health' then 1
+		else 0
+	end as patient_counter,
+--	case when case_origin = 'Occupational Health' and partner_organisation = 'NHS Aneurin Bevan' then 1 else 0 end as oh_counter,
+	case 
+		when staff_flag = 'Yes' then 1 
+		when EPVIS_RowId in (select episode_id from temp.covid19_occ_health_override) then 1
+		else 0 end 
+	as oh_counter,
+	case 
+		when (EPVIS_HospitalCode_DR like '7A6%' or EPVIS_UserSite_DR like '7A6%') and case_origin = 'Occupational Health' and staff_flag = 'No' then 1
+		else 0 
+	end as po_counter,
+	case when care_home_flag = 'Yes' then 1 else 0 end as care_home_counter,
+	case when LocalHealthBoardResidenceCode = '7A6' then 1 else 0 end as res_counter,
+	case 
+		when CTUPersonTypeConsolidated = 'HCW' and EPVIS_DoctorCode_DR = 'COVID1936' then 1
+		else 0
+	end as staff_counter,
+	*, 
+	row_number() over(partition by coalesce(caseno, nhs, EPVIS_RowId), result order by EPVIS_DateTimeOfCollection) as result_position
+FROM (
+select
+	f.*,
+	(CONVERT(int,CONVERT(char(8),getdate(),112))-CONVERT(char(8),coalesce(dp.birthdate,SubjectDOB),112))/10000 as age,
+    dd.id as date_id,
+	dt.id as time_id,
+	dp.id as patient_id,
+    coalesce(pcr.id,pc.id) as postcode_id, --changed to using result postcode as default
+    dch.id as care_home_id,
+    coalesce(pcr.lsoa11,pc.lsoa11) as lsoa11,
+    dgp.id as gp_practice_id,
+    coalesce(dsex.id,dsexr.id) as sex_id,
+--	occ.location_id,
+--	occ.specialty_id,
+--	occ.clinician_id,
+	dl.id as location_id,
+	ds.id as specialty_id,
+	dc.id as clinician_id,
+	de.id as ethnicity_id,
+	dlqc.id as lims_qualifier_category_id,
+	dld.id as lims_doctor_id,
+	dll.id as lims_location_id,
+	--case when epvis_patienttype in ('IP','ITU','AE') /*PP,OP,DC,OTH,OH,IP,DIAL,COM,ITU,AE,GP*/ then 'Yes' else 'No' end as tested_in_hospital2,
+	--coalesce((select top 1 1 from _cws.movements cws where f.caseno = cws.crn and f.EPVIS_DateTimeOfCollection between cws.movement_start and coalesce(cws.movement_end,getdate())),0) as tested_in_hospital,
+--	case when cws.crn is not null then 1 else 0 end as tested_in_hospital,
+	case	when cws.crn is not null then 1
+			when abpsdnhs.abuhb_provider_stay_id is not null then 1 
+			when abpsdcaseno.abuhb_provider_stay_id is not null then 1 
+			else 0 
+	end as tested_in_hospital,
+		datediff(d,cws1st.movement_start,f.EPVIS_DateOfCollection) as tested_in_hospital_delay,
+--	datediff(d,psd.provider_start_date,f.EPVIS_DateOfCollection) as tested_in_provider_delay,
+	datediff(d,coalesce(abpsdnhs.provider_start_date,abpsdcaseno.provider_start_date),f.EPVIS_DateOfCollection) as tested_in_provider_delay,
+	case 
+		when dll.lims_location_type is not null then dll.lims_location_type
+		when EPVIS_RowId in (select episode_id from temp.covid19_occ_health_override) then 'Occupational Health'
+		else f.PatientTypeDescription
+	end as case_origin,
+	case 
+		when EPVIS_DoctorCode_DR like 'COV[I!]D19%' and EPVIS_DoctorCode_DR not in ('COVID19','COVID1936') then trim(replace(replace(Doctor,'Community Testing Unit','CTU'),'CTU',''))
+		when EPVIS_DoctorCode_DR like 'COV%' and EPVIS_DoctorCode_DR not in ('COVID19','COVID1936') then Doctor
+		when epvis_hospitalcode_dr in ('7A6AR6CTU01','7A6AR6CTU02','7A6ATOH', '7A6AR6CTU13') and dlqc.reporting_category in ('Care Home Resident','Care Home Worker')  then qualifiercategory
+		when epvis_hospitalcode_dr = 'RYTU6NHSDCH' and f.LocalHealthBoardResidenceCode = '7A6' then Doctor
+		when epvis_hospitalcode_dr in ('7A6AR6CTU01','7A6AR6CTU02','7A6ATOH', '7A6AR6CTU13') then 'NHS Aneurin Bevan'
+		when epvis_hospitalcode_dr like '7A6%' and EPVIS_PatientType = 'OH' then 'NHS Aneurin Bevan'
+		when EPVIS_RowId in (select episode_id from temp.covid19_occ_health_override) then 'NHS Aneurin Bevan'
+	end as partner_organisation,
+	case
+		when dll.lims_location_type = 'Occupational Health' and coalesce(dld.institution,'') = '' and coalesce(dlqc.reporting_category,'') = '' then 'Yes'
+		else 'No'
+	end as staff_flag,
+	case 
+		when dcfp.covid_false_positive = 'Yes' then 'Negative'
+		when VISTD_TestData in ('D6','D7','LL7') then 'Positive'
+		when VISTD_TestData in ('ND','ND7') then 'Negative'
+		else 'In Progress'
+	end as result,
+	case 
+		when dll.lims_location_type = 'Care Home' and f.LocalHealthBoardResidenceCode = '7A6' then 'Yes'
+		when dlqc.reporting_category in ('Care Home Resident','Care Home Worker') and f.LocalHealthBoardResidenceCode = '7A6' then 'Yes'
+		when dld.institution = 'Care Home' then 'Yes'
+		else 'No'
+	end as care_home_flag,
+	row_number() over(partition by EPVIS_RowId order by cws.origin desc, cws.episode_seq desc) as noitisop
+	FROM
+	(
+select 
+	episode as EPVIS_RowId,
+	coalesce(dpcrn.caseno,dpnhs.caseno) as caseno,
+	NHSNO as nhs,
+	SubjectSurname,
+	SubjectFirstForename as SubjectGivenName,
+	SubjectGenderCode,
+	SubjectDOB,
+	NHSNo as SubjectNHS,
+	SubjectPostcode,
+	LocalHealthBoardResidenceCode,
+	CRNAssigningAuthority+', ' + CRN as SubjectLocalId,
+	TestingLabCode as EPVIS_UserSite_DR,
+	OutbreakCode as EPVIS_OutbreakCode_DR,
+	PatientTypeCode as EPVIS_PatientType,
+	PatientTypeDescription,
+	DoctorCode as EPVIS_DoctorCode_DR,
+	Doctor,
+	LocationCode as EPVIS_HospitalCode_DR,
+	ClinicalHistory,
+	CTUPersonType,
+	CTUPersonTypeConsolidated,
+	SpecimenCollectedDate as EPVIS_DateOfCollection,
+	SpecimenCollectedTime as EPVIS_TimeOfCollection,
+	SpecimenCollectedDateTime as EPVIS_DateTimeOfCollection,
+	SpecimenReceivedDate,
+	SpecimenReceivedTime,
+	SpecimenReceivedDateTime,
+	EpisodeSetKey as VISTS_RowId,
+	AuthorisedDate as VISTS_DateOfAuthorisation,
+	AuthorisedTime as VISTS_TimeOfAuthorisation,
+	AuthorisedDateTime as VISTS_DateTimeOfAuthorisation,
+	EpisodeSetKey + '||' + TestCode as VISTD_RowId,
+	TestCode as VISTD_TestCode_DR,
+	ResultCode as VISTD_TestData, 
+	row_number() over(partition by episode order by case when resultcode like 'D%' then 1 when resultcode like 'L%' then 2 when resultcode like 'N%' then 3 else 4 end) as position,
+	case when ClinicalHistoryPhone ='See Clinical History' then [Contact details] else coalesce(ClinicalHistoryPhone,[Contact details]) end as Phone,
+	--[Contact details]
+	Location + ' (' + LocationCode + ')' as RequestLocation,
+	--Hospital,
+	ClinicalHistory as ClinicalDetails,
+	CTUPersonType as QualifierCategory,
+	Outbreak,
+	--SpecimenType, ...eg. Throat Swab
+	SpecimenReceivedDate as DateReceived,
+	TestingLabName as TestLab,
+	TestSetName + ' (' + TestSetLIMSCode + ')' as TestSet,
+	ResultName as CoronavirusPCRResult,
+	ResultComment as ResultComments,
+	ReportComments,
+	AutoComments,
+	Method as TestMethod,
+	_updated
+---from [_nwis].[_COVID_LIMSTestResults2]
+from _nwis.CovidTestResults_latest
+left join dim.patient dpcrn on CRN = dpcrn.system_key and dpcrn.system = 'myrddin' and dpcrn.end_date = '29991231' and CRNAssigningAuthority = 'ABH Myrddin'
+left join dim.patient dpnhs on NHSNo = dpnhs.nhs and dpnhs.system = 'myrddin' and dpnhs.end_date = '29991231' and dpnhs.caseno = dpnhs.system_key
+--where (LocationCode like '7A6%' or TestingLabCode like '7A6%')
+--and PossibleDuplicateOrSurplusRecord = 0
+where isnull(SubjectFirstForename,'') not in ('TEST','TESTA','TESTER')
+and _updated &gt;='20220401'
+)f
+--left join _lims._CT_Doctor CTDR on EPVIS_DoctorCode_DR = CTDR_RowId
+left join dim.date dd with (nolock) on f.EPVIS_DateOfCollection = dd.date
+left join dim.time dt with (nolock) on f.EPVIS_TimeOfCollection = dt.system_key and dt.system = 'derived' and f.EPVIS_DateOfCollection between dt.start_date and dt.end_date
+left join dim.patient dp with (nolock) on f.caseno = dp.system_key and dp.system = 'myrddin' and f.EPVIS_DateOfCollection between dp.start_date and dp.end_date 
+	left join dim.care_home dch with (nolock) on dp.care_home = dch.system_key and dch.system = 'cssiw' and f.EPVIS_DateOfCollection between dch.start_date and dch.end_date
+	left join dim_table.postcode pc with (nolock) on dp.postcode = pc.system_key and pc.system = 'postcode' and f.EPVIS_DateOfCollection between pc.start_date and pc.end_date 	
+	left join dim_table.postcode pcr with (nolock) on f.SubjectPostcode = pcr.system_key and pcr.system = 'postcode' and f.EPVIS_DateOfCollection between pcr.start_date and pcr.end_date
+	left join dim.sex dsex with (nolock) on dp.sex = dsex.system_key and dsex.system = 'demographic' and f.EPVIS_DateOfCollection between dsex.start_date and dsex.end_date 
+	left join dim.sex dsexr with (nolock) on f.SubjectGenderCode = dsexr.system_key and dsexr.system = 'demographic' and f.EPVIS_DateOfCollection between dsexr.start_date and dsexr.end_date
+	left join dim.gp_practice dgp with (nolock) on dp.gp_practice = dgp.system_key and dgp.system = 'national' and f.EPVIS_DateOfCollection between dgp.start_date and dgp.end_date
+	left join dim.ethnicity de with (nolock) on dp.ethnic_origin = de.system_key and de.system = 'myrddin' and f.EPVIS_DateOfCollection between de.start_date and de.end_date
+left join _cws.movements cws on f.caseno = cws.crn and f.EPVIS_DateTimeOfCollection &gt;= cws.movement_start and f.EPVIS_DateTimeOfCollection &lt; coalesce(cws.movement_end,getdate()) --and cws.ward not like '%*[0-9]_' and cws.ward not like '%*ND'
+	left join dim.location dl with (nolock) on cws.ward = dl.system_key and dl.system = 'cws' and f.EPVIS_DateOfCollection between dl.start_date and dl.end_date
+	left join dim.specialty ds with (nolock) on cws.specialty = ds.system_key and ds.system = 'cws' and f.EPVIS_DateOfCollection between ds.start_date and ds.end_date
+	left join dim.clinician dc with (nolock) on cws.consultant = dc.system_key and dc.system = 'myrddin' and f.EPVIS_DateOfCollection between dc.start_date and dc.end_date
+	left join _cws.movements cws1st on cws.episode_seq = cws1st.episode_seq and cws.origin = cws1st.origin and cws1st.movement_number = 1
+
+left join dim.lims_qualifier_category dlqc with (nolock)  on dlqc.system_key = f.QualifierCategory and dlqc.system = 'lims' and f.EPVIS_DateOfCollection between dlqc.start_date and dlqc.end_date
+left join dim.lims_doctor dld with (nolock)  on dld.system_key = f.EPVIS_DoctorCode_DR and dld.system = 'lims' and f.EPVIS_DateOfCollection between dld.start_date and dld.end_date
+left join dim.lims_location dll with (nolock)  on dll.system_key = f.epvis_hospitalcode_dr and dll.system = 'lims' and f.EPVIS_DateOfCollection between dll.start_date and dll.end_date
+
+left join _wpas.provider_stay_derived psd with (nolock)  on f.caseno = psd.caseno and f.EPVIS_DateTimeOfCollection &gt;= psd.provider_start_date and coalesce(f.EPVIS_DateTimeOfCollection,getdate()) &lt; psd.provider_end_date
+
+left join _abuhb.provider_stay_derived abpsdnhs with (nolock) on f.nhs = abpsdnhs.nhs and f.EPVIS_DateTimeOfCollection &gt;= abpsdnhs.provider_start_date and coalesce(f.EPVIS_DateTimeOfCollection,getdate()) &lt; abpsdnhs.provider_end_date
+left join _abuhb.provider_stay_derived abpsdcaseno with (nolock) on f.caseno = abpsdcaseno.caseno and f.EPVIS_DateTimeOfCollection &gt;= abpsdcaseno.provider_start_date and coalesce(f.EPVIS_DateTimeOfCollection,getdate()) &lt; abpsdcaseno.provider_end_date
+
+left join dim.covid_false_positive dcfp on f.VISTS_RowId = dcfp.system_key and dcfp.system = 'lims' and dcfp.end_date = '29991231' and dcfp.covid_false_positive = 'Yes'
+
+
+where f.position = 1
+)T where EPVIS_RowId not in ('7004680277','7004661106','1409551424','1409551877') --Test Patients
+and coalesce(subjectsurname,'') not in ('QCMD 2020','TEST')
+--and (partner_organisation = 'NHS Aneurin Bevan' or case_origin &lt;&gt; 'Occupational Health')
+and noitisop = 1;
+</DTS:VariableValue>
+    </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
       DTS:DTSID="{054BDAEB-0825-4753-A97C-CF709040A36D}"
